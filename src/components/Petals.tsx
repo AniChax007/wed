@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 const PETALS = ['🌸', '🌺', '🌼'] as const
 
 const particles = Array.from({ length: 14 }).map((_, i) => ({
@@ -9,9 +11,14 @@ const particles = Array.from({ length: 14 }).map((_, i) => ({
   emoji: PETALS[i % PETALS.length],
 }))
 
-function Petals() {
+function Petals({ show = true }: { show?: boolean }) {
+  if (!show) return null
+
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
       className="pointer-events-none fixed inset-0 z-30 overflow-hidden"
       aria-hidden="true"
     >
@@ -30,7 +37,7 @@ function Petals() {
           {p.emoji}
         </div>
       ))}
-    </div>
+    </motion.div>
   )
 }
 

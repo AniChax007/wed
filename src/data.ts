@@ -1,5 +1,5 @@
 // Duration (ms) of the envelope-unfold animation before the page swaps to the main content.
-export const ENVELOPE_OPEN_MS = 1600
+export const ENVELOPE_OPEN_MS = 2200
 
 export const couple = {
   brideName: 'Susmita',

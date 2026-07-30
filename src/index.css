@@ -2,11 +2,15 @@
 
 @theme {
   --color-cream: #fdfbf7;
+  --color-cream-warm: #faf5ea;
   --color-blush: #f6d5d9;
   --color-blush-deep: #e7a8b2;
   --color-gold: #c9a227;
   --color-gold-light: #e9cd7a;
+  --color-gold-dark: #a07c1a;
   --color-ink: #5b2333;
+  --color-maroon: #7b2d3a;
+  --color-vermilion: #e23d28;
 
   --font-script: 'Great Vibes', cursive;
   --font-serif: 'Cormorant Garamond', serif;
@@ -23,6 +27,8 @@ body {
   font-family: var(--font-serif);
   color: var(--color-ink);
 }
+
+/* ── Petal rain animations ─────────────────────────────────────────── */
 
 @keyframes petal-fall {
   from {
@@ -51,7 +57,99 @@ body {
   animation-direction: normal, alternate;
 }
 
-/* Presents the card like an app on wider screens; full-bleed on phones. */
+/* ── Gold shimmer effect ───────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold) 0%,
+    var(--color-gold-light) 25%,
+    #f5e6a3 50%,
+    var(--color-gold-light) 75%,
+    var(--color-gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/* ── Vermilion dot (sindoor tikli) used on dividers ────────────────── */
+
+.sindoor-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--color-vermilion);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(226, 61, 40, 0.35);
+}
+
+/* ── Section divider with Bengali alpona motif ─────────────────────── */
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(
+    to var(--dir, right),
+    transparent,
+    var(--color-gold-light)
+  );
+}
+
+.section-divider::after {
+  --dir: left;
+}
+
+/* ── Glowing gold border for cards ─────────────────────────────────── */
+
+.royal-border {
+  border: 1px solid var(--color-gold-light);
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.08),
+    0 4px 20px -4px rgba(201, 162, 39, 0.12);
+}
+
+/* ── Fade-in-up animation for scroll reveals ───────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* ── Presents the card like an app on wider screens ────────────────── */
+
 @media (min-width: 480px) {
   .phone-card {
     max-width: 430px;

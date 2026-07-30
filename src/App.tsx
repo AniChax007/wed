@@ -3,7 +3,9 @@ import Envelope from './components/Envelope'
 import { ENVELOPE_OPEN_MS } from './data'
 import AudioPlayer from './components/AudioPlayer'
 import Header from './components/Header'
+import CouplePortrait from './components/CouplePortrait'
 import Countdown from './components/Countdown'
+import ClaspedHands from './components/ClaspedHands'
 import Timeline from './components/Timeline'
 import LocationMap from './components/LocationMap'
 import Guidelines from './components/Guidelines'
@@ -36,14 +38,16 @@ function App() {
   return (
     <div className="phone-card relative min-h-screen bg-cream">
       <audio ref={audioRef} src="/audio/wedding-song.mp3" loop />
-      <Petals />
 
       {!isOpen ? (
         <Envelope onOpen={handleOpenEnvelope} />
       ) : (
         <>
+          <Petals />
           <Header />
+          <CouplePortrait />
           <Countdown />
+          <ClaspedHands />
           <Timeline />
           <LocationMap />
           <Guidelines />
