@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #fdfbf7;
+  --color-blush: #f6d5d9;
+  --color-blush-deep: #e7a8b2;
+  --color-gold: #c9a227;
+  --color-gold-light: #e9cd7a;
+  --color-ink: #5b2333;
+
+  --font-script: 'Great Vibes', cursive;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-bangla: 'Tiro Bangla', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+}
+
+@keyframes petal-fall {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  to {
+    transform: translateY(110vh) rotate(200deg);
+  }
+}
+
+@keyframes petal-sway {
+  from {
+    margin-left: -18px;
+  }
+  to {
+    margin-left: 18px;
+  }
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  animation-name: petal-fall, petal-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+}
+
+/* Presents the card like an app on wider screens; full-bleed on phones. */
+@media (min-width: 480px) {
+  .phone-card {
+    max-width: 430px;
+    margin-inline: auto;
+    border-radius: 2.5rem;
+    box-shadow: 0 30px 60px -20px rgba(91, 35, 51, 0.35);
+    overflow: hidden;
+    /* Establishes a containing block so fixed-position children (petals,
+       audio button, RSVP modal) clip to the card instead of the viewport. */
+    transform: translateZ(0);
+  }
+}
