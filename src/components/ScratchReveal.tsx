@@ -1,9 +1,214 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import ScratchCard, { Covers, Brushes } from 'react-scratchcard-v2'
 import { scratchEvents } from '../data'
 import { Sparkles, CheckCircle2 } from 'lucide-react'
 
+/* ── Custom HTML5 Canvas ScratchCard Component (Zero External Dependencies) ── */
+interface CustomScratchCardProps {
+  width: number
+  height: number
+  coverColor?: string
+  finishPercent?: number
+  onComplete: () => void
+}
+
+function CustomScratchCard({
+  width,
+  height,
+  coverColor = '#3f0c1b',
+  finishPercent = 35,
+  onComplete,
+}: CustomScratchCardProps) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const isDrawingRef = useRef(false)
+  const lastPointRef = useRef<{ x: number; y: number } | null>(null)
+  const isCompletedRef = useRef(false)
+
+  // Draw initial velvet maroon cover on canvas
+  const drawCover = useCallback(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
+    if (!ctx) return
+
+    ctx.save()
+    ctx.globalCompositeOperation = 'source-over'
+
+    // Deep Velvet Maroon Radial Gradient
+    const gradient = ctx.createRadialGradient(
+      width / 2,
+      height / 2,
+      10,
+      width / 2,
+      height / 2,
+      Math.max(width, height) / 1.2
+    )
+    gradient.addColorStop(0, '#5c0e24')
+    gradient.addColorStop(0.7, coverColor)
+    gradient.addColorStop(1, '#2b0612')
+
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, width, height)
+
+    // Gold decorative border inside canvas
+    ctx.strokeStyle = 'rgba(240, 208, 110, 0.4)'
+    ctx.lineWidth = 2
+    ctx.strokeRect(6, 6, width - 12, height - 12)
+
+    // Sparkle icon circle background
+    ctx.fillStyle = 'rgba(212, 161, 42, 0.25)'
+    ctx.beginPath()
+    ctx.arc(width / 2, height / 2 - 20, 22, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.strokeStyle = 'rgba(240, 208, 110, 0.6)'
+    ctx.lineWidth = 1.5
+    ctx.stroke()
+
+    // Gold Sparkle star symbol
+    ctx.fillStyle = '#ffd700'
+    ctx.font = 'bold 20px serif'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('✦', width / 2, height / 2 - 20)
+
+    // "✨ Scratch Here ✨" text
+    ctx.fillStyle = '#ffd700'
+    ctx.font = 'bold 15px "Elsie Swash Caps", "Cormorant Garamond", serif'
+    ctx.fillText('✨ Scratch Here ✨', width / 2, height / 2 + 15)
+
+    // Subtitle
+    ctx.fillStyle = 'rgba(240, 208, 110, 0.85)'
+    ctx.font = 'italic 12px "Elsie", "Cormorant Garamond", serif'
+    ctx.fillText('Scratch to reveal date & venue', width / 2, height / 2 + 35)
+
+    ctx.restore()
+  }, [width, height, coverColor])
+
+  useEffect(() => {
+    drawCover()
+  }, [drawCover])
+
+  // Calculate percentage erased
+  const checkCompletion = useCallback(() => {
+    if (isCompletedRef.current) return
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
+    if (!ctx) return
+
+    const imageData = ctx.getImageData(0, 0, width, height)
+    const pixels = imageData.data
+    let transparentCount = 0
+
+    // Sample every 4th pixel for high performance
+    for (let i = 3; i < pixels.length; i += 16) {
+      if (pixels[i] === 0) {
+        transparentCount++
+      }
+    }
+
+    const totalSampled = pixels.length / 16
+    const percentErased = (transparentCount / totalSampled) * 100
+
+    if (percentErased >= finishPercent) {
+      isCompletedRef.current = true
+      onComplete()
+    }
+  }, [width, height, finishPercent, onComplete])
+
+  // Erase pixels along mouse/touch path
+  const scratch = useCallback(
+    (x: number, y: number) => {
+      const canvas = canvasRef.current
+      if (!canvas || isCompletedRef.current) return
+      const ctx = canvas.getContext('2d', { willReadFrequently: true })
+      if (!ctx) return
+
+      ctx.save()
+      ctx.globalCompositeOperation = 'destination-out'
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      ctx.lineWidth = 45 // Brush radius
+
+      ctx.beginPath()
+      if (lastPointRef.current) {
+        ctx.moveTo(lastPointRef.current.x, lastPointRef.current.y)
+        ctx.lineTo(x, y)
+      } else {
+        ctx.arc(x, y, 22.5, 0, Math.PI * 2)
+      }
+      ctx.stroke()
+      ctx.restore()
+
+      lastPointRef.current = { x, y }
+      checkCompletion()
+    },
+    [checkCompletion]
+  )
+
+  const getCanvasCoords = (e: React.MouseEvent | React.TouchEvent) => {
+    const canvas = canvasRef.current
+    if (!canvas) return null
+    const rect = canvas.getBoundingClientRect()
+    let clientX = 0
+    let clientY = 0
+
+    if ('touches' in e && e.touches.length > 0) {
+      clientX = e.touches[0].clientX
+      clientY = e.touches[0].clientY
+    } else if ('clientX' in e) {
+      clientX = e.clientX
+      clientY = e.clientY
+    } else {
+      return null
+    }
+
+    return {
+      x: (clientX - rect.left) * (width / rect.width),
+      y: (clientY - rect.top) * (height / rect.height),
+    }
+  }
+
+  const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
+    isDrawingRef.current = true
+    const coords = getCanvasCoords(e)
+    if (coords) {
+      lastPointRef.current = coords
+      scratch(coords.x, coords.y)
+    }
+  }
+
+  const handlePointerMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDrawingRef.current) return
+    const coords = getCanvasCoords(e)
+    if (coords) {
+      scratch(coords.x, coords.y)
+    }
+  }
+
+  const handlePointerUp = () => {
+    isDrawingRef.current = false
+    lastPointRef.current = null
+  }
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={width}
+      height={height}
+      onMouseDown={handlePointerDown}
+      onMouseMove={handlePointerMove}
+      onMouseUp={handlePointerUp}
+      onMouseLeave={handlePointerUp}
+      onTouchStart={handlePointerDown}
+      onTouchMove={handlePointerMove}
+      onTouchEnd={handlePointerUp}
+      className="w-full h-full cursor-pointer touch-none select-none"
+    />
+  )
+}
+
+/* ── Main Scratch Reveal Section ───────────────────────────────────────────── */
 function ScratchReveal() {
   const [revealed, setRevealed] = useState<Record<string, boolean>>({})
 
@@ -13,7 +218,7 @@ function ScratchReveal() {
 
   return (
     <section className="relative px-6 py-14 text-center overflow-hidden">
-      {/* Background glow */}
+      {/* Ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
         style={{
@@ -108,57 +313,21 @@ function ScratchReveal() {
                   </div>
                 </div>
 
-                {/* ── React ScratchCard Overlay using Deep Maroon/Velvet Color ────────── */}
+                {/* ── Zero-Dependency HTML5 Canvas Scratch Overlay ────────────── */}
                 <AnimatePresence>
                   {!isDone && (
                     <motion.div
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.6 }}
-                      className="absolute inset-0 z-20 flex items-center justify-center rounded-b-2xl overflow-hidden cursor-pointer"
-                      style={{ touchAction: 'none' }}
+                      className="absolute inset-0 z-20 flex items-center justify-center rounded-b-2xl overflow-hidden"
                     >
-                      <ScratchCard
+                      <CustomScratchCard
                         width={350}
                         height={175}
-                        cover={Covers.color('#3f0c1b')}
-                        brush={Brushes.circle(25)}
+                        coverColor="#3f0c1b"
                         finishPercent={35}
                         onComplete={() => handleComplete(evt.id)}
-                      >
-                        {/* Velvet Maroon cover visual content */}
-                        <div
-                          className="w-full h-full flex flex-col items-center justify-center p-4 relative"
-                          style={{
-                            background:
-                              'radial-gradient(ellipse at center, #5c0e24 0%, #3f0c1b 70%, #2b0612 100%)',
-                            color: '#ffd700',
-                          }}
-                        >
-                          {/* Damask / Alpona Pattern overlay */}
-                          <div
-                            className="absolute inset-0 opacity-15 pointer-events-none"
-                            style={{
-                              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' fill='%23ffd700' fill-opacity='0.4'/%3E%3C/svg%3E")`,
-                              backgroundSize: '20px 20px',
-                            }}
-                          />
-
-                          <motion.div
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="w-10 h-10 rounded-full bg-gold/20 border border-gold-light/40 flex items-center justify-center shadow-md mb-2 relative z-10"
-                          >
-                            <Sparkles className="w-5 h-5 text-gold-bright" />
-                          </motion.div>
-
-                          <p className="font-elsie-swash font-bold text-base text-gold-bright relative z-10 tracking-wider">
-                            ✨ Scratch Here ✨
-                          </p>
-                          <p className="font-elsie text-xs text-gold-light/90 relative z-10 italic mt-0.5">
-                            Scratch to reveal date &amp; venue
-                          </p>
-                        </div>
-                      </ScratchCard>
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>
