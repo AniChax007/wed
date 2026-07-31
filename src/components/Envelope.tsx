@@ -4,113 +4,128 @@ import { couple, ENVELOPE_OPEN_MS } from '../data'
 
 const OPEN_S = ENVELOPE_OPEN_MS / 1000
 
-/* ── SVG Mandala Component ─────────────────────────────────────────── */
-function Mandala({ className = '' }: { className?: string }) {
+/* ── Baroque Corner Ornament SVG ──────────────────────────────────── */
+function BaroqueCorner({ className = '' }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 400 400"
+      viewBox="0 0 200 200"
       className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Outer ring of petals */}
-      {Array.from({ length: 16 }).map((_, i) => (
-        <g key={`outer-${i}`} transform={`rotate(${i * 22.5} 200 200)`}>
-          <path
-            d="M200 60 Q220 120 200 140 Q180 120 200 60Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            opacity="0.7"
-          />
-          <circle cx="200" cy="75" r="4" fill="currentColor" opacity="0.5" />
-        </g>
-      ))}
-
-      {/* Middle ring — lotus-style petals */}
-      {Array.from({ length: 12 }).map((_, i) => (
-        <g key={`mid-${i}`} transform={`rotate(${i * 30} 200 200)`}>
-          <path
-            d="M200 90 Q225 140 200 160 Q175 140 200 90Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            opacity="0.8"
-          />
-          <path
-            d="M200 100 Q215 135 200 150 Q185 135 200 100Z"
-            fill="currentColor"
-            opacity="0.08"
-          />
-        </g>
-      ))}
-
-      {/* Inner decorative circles */}
-      {Array.from({ length: 24 }).map((_, i) => {
-        const angle = (i * 15) * (Math.PI / 180)
-        const cx = 200 + Math.cos(angle) * 110
-        const cy = 200 + Math.sin(angle) * 110
-        return (
-          <circle
-            key={`dot-outer-${i}`}
-            cx={cx}
-            cy={cy}
-            r={i % 2 === 0 ? 3.5 : 2}
-            fill="currentColor"
-            opacity={i % 2 === 0 ? 0.6 : 0.35}
-          />
-        )
-      })}
-
-      {/* Inner ring of petals (smaller) */}
-      {Array.from({ length: 8 }).map((_, i) => (
-        <g key={`inner-${i}`} transform={`rotate(${i * 45} 200 200)`}>
-          <path
-            d="M200 125 Q218 158 200 175 Q182 158 200 125Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            opacity="0.75"
-          />
-          <path
-            d="M200 130 Q212 152 200 165 Q188 152 200 130Z"
-            fill="currentColor"
-            opacity="0.1"
-          />
-        </g>
-      ))}
-
-      {/* Innermost decorative circle ring */}
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i * 22.5) * (Math.PI / 180)
-        const cx = 200 + Math.cos(angle) * 82
-        const cy = 200 + Math.sin(angle) * 82
-        return (
-          <circle
-            key={`dot-inner-${i}`}
-            cx={cx}
-            cy={cy}
-            r={2.5}
-            fill="currentColor"
-            opacity="0.5"
-          />
-        )
-      })}
-
-      {/* Scalloped inner border */}
-      <circle cx="200" cy="200" r="68" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.4" />
-      <circle cx="200" cy="200" r="72" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.25" strokeDasharray="4 4" />
+      {/* Main scrollwork */}
+      <path
+        d="M10 190 C10 140, 20 100, 50 70 C65 52, 85 40, 110 35 C90 55, 80 75, 82 95 C84 110, 95 120, 110 118 C125 116, 130 100, 125 88 C120 78, 108 75, 100 80"
+        stroke="url(#goldGrad)"
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M15 185 C18 150, 30 115, 55 85 C68 70, 82 58, 100 50"
+        stroke="url(#goldGrad)"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+      />
+      {/* Outer curl */}
+      <path
+        d="M5 195 C5 130, 25 80, 65 50 C85 35, 115 25, 150 25 C130 40, 118 55, 115 72 C112 88, 120 100, 135 95"
+        stroke="url(#goldGrad)"
+        strokeWidth="2.5"
+        fill="none"
+        strokeLinecap="round"
+      />
+      {/* Inner flourish */}
+      <path
+        d="M25 175 C30 145, 45 115, 70 90 C82 78, 95 70, 108 68 C95 80, 90 92, 93 102 C96 112, 105 115, 112 110"
+        stroke="url(#goldGrad)"
+        strokeWidth="1.8"
+        fill="none"
+        strokeLinecap="round"
+      />
+      {/* Leaf/acanthus details */}
+      <path
+        d="M50 70 C45 60, 55 48, 65 50 C72 52, 68 62, 60 65"
+        stroke="url(#goldGrad)"
+        strokeWidth="2"
+        fill="url(#goldGradFill)"
+        fillOpacity="0.3"
+      />
+      <path
+        d="M110 35 C115 25, 130 22, 135 30 C138 36, 128 42, 118 38"
+        stroke="url(#goldGrad)"
+        strokeWidth="2"
+        fill="url(#goldGradFill)"
+        fillOpacity="0.3"
+      />
+      <path
+        d="M150 25 C158 18, 170 20, 168 30 C166 38, 155 35, 152 28"
+        stroke="url(#goldGrad)"
+        strokeWidth="1.8"
+        fill="url(#goldGradFill)"
+        fillOpacity="0.25"
+      />
+      {/* Small scroll detail */}
+      <path
+        d="M65 50 C75 42, 90 38, 100 42"
+        stroke="url(#goldGrad)"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <path
+        d="M135 95 C145 88, 155 90, 152 100 C150 108, 140 105, 138 98"
+        stroke="url(#goldGrad)"
+        strokeWidth="1.5"
+        fill="url(#goldGradFill)"
+        fillOpacity="0.2"
+      />
+      {/* Decorative dots */}
+      <circle cx="100" cy="80" r="3" fill="url(#goldGradFill)" opacity="0.6" />
+      <circle cx="125" cy="88" r="2.5" fill="url(#goldGradFill)" opacity="0.5" />
+      <circle cx="60" cy="65" r="2" fill="url(#goldGradFill)" opacity="0.5" />
+      <circle cx="140" cy="30" r="2.5" fill="url(#goldGradFill)" opacity="0.5" />
+      <circle cx="80" cy="55" r="1.8" fill="url(#goldGradFill)" opacity="0.4" />
+      {/* Additional filigree lines */}
+      <path
+        d="M30 160 C35 140, 50 125, 60 118"
+        stroke="url(#goldGrad)"
+        strokeWidth="1.2"
+        fill="none"
+        opacity="0.6"
+      />
+      <path
+        d="M8 180 C12 160, 22 140, 40 120"
+        stroke="url(#goldGrad)"
+        strokeWidth="1"
+        fill="none"
+        opacity="0.4"
+      />
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#b8860b" />
+          <stop offset="30%" stopColor="#d4a832" />
+          <stop offset="50%" stopColor="#f5e6a3" />
+          <stop offset="70%" stopColor="#d4a832" />
+          <stop offset="100%" stopColor="#b8860b" />
+        </linearGradient>
+        <linearGradient id="goldGradFill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#c9a227" />
+          <stop offset="50%" stopColor="#e9cd7a" />
+          <stop offset="100%" stopColor="#c9a227" />
+        </linearGradient>
+      </defs>
     </svg>
   )
 }
 
 /* ── Floating gold particles ───────────────────────────────────────── */
 function GoldParticles() {
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
+  const particles = Array.from({ length: 15 }).map((_, i) => ({
     left: `${(i * 47 + 13) % 100}%`,
     top: `${(i * 31 + 7) % 100}%`,
-    size: 2 + (i % 4),
-    delay: i * 0.4,
+    size: 2 + (i % 3),
+    delay: i * 0.5,
     duration: 3 + (i % 3),
   }))
 
@@ -125,12 +140,12 @@ function GoldParticles() {
             top: p.top,
             width: p.size,
             height: p.size,
-            background: 'radial-gradient(circle, #e9cd7a, #c9a227)',
+            background: 'radial-gradient(circle, #f5e6a3, #c9a227)',
           }}
           animate={{
-            opacity: [0, 0.8, 0],
-            scale: [0, 1.5, 0],
-            y: [0, -30, -60],
+            opacity: [0, 0.7, 0],
+            scale: [0, 1.3, 0],
+            y: [0, -25, -50],
           }}
           transition={{
             duration: p.duration,
@@ -140,94 +155,6 @@ function GoldParticles() {
           }}
         />
       ))}
-    </div>
-  )
-}
-
-/* ── Corner ornament SVG ───────────────────────────────────────────── */
-function CornerOrnament({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 120" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Paisley-inspired corner flourish */}
-      <path
-        d="M10 110 Q10 60 40 35 Q55 22 75 20 Q60 35 55 55 Q52 70 58 80 Q65 90 80 85 Q70 100 50 100 Q30 100 15 90Z"
-        fill="currentColor"
-        opacity="0.08"
-        stroke="currentColor"
-        strokeWidth="0.8"
-      />
-      <path
-        d="M5 105 Q8 70 30 45 Q45 30 65 25"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1"
-        opacity="0.35"
-      />
-      <path
-        d="M15 110 Q18 80 35 55 Q45 42 60 35"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="0.8"
-        opacity="0.25"
-      />
-      <circle cx="65" cy="25" r="3" fill="currentColor" opacity="0.4" />
-      <circle cx="60" cy="35" r="2" fill="currentColor" opacity="0.3" />
-      {/* Small decorative dots along the curve */}
-      <circle cx="25" cy="55" r="1.5" fill="currentColor" opacity="0.3" />
-      <circle cx="35" cy="42" r="1.5" fill="currentColor" opacity="0.3" />
-      <circle cx="48" cy="33" r="1.5" fill="currentColor" opacity="0.3" />
-    </svg>
-  )
-}
-
-/* ── Vertical ornamental border pattern ────────────────────────────── */
-function DoorOrnaments({ side }: { side: 'left' | 'right' }) {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {/* Subtle vertical fluting lines */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(90deg, rgba(201,162,39,0.06) 0px, rgba(201,162,39,0.06) 1px, transparent 1px, transparent 28px)',
-        }}
-      />
-
-      {/* Gold border edge */}
-      <div
-        className={`absolute inset-y-0 w-[3px] ${side === 'left' ? 'right-0' : 'left-0'}`}
-        style={{
-          background: 'linear-gradient(to bottom, transparent, #c9a227 20%, #e9cd7a 50%, #c9a227 80%, transparent)',
-        }}
-      />
-
-      {/* Corner ornaments */}
-      <CornerOrnament
-        className={`absolute w-24 h-24 text-gold ${
-          side === 'left' ? 'top-4 left-4' : 'top-4 right-4 -scale-x-100'
-        }`}
-      />
-      <CornerOrnament
-        className={`absolute w-24 h-24 text-gold ${
-          side === 'left'
-            ? 'bottom-4 left-4 -scale-y-100'
-            : 'bottom-4 right-4 -scale-x-100 -scale-y-100'
-        }`}
-      />
-
-      {/* Vertical decorative motif (paisley chain) */}
-      <div
-        className={`absolute top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 ${
-          side === 'left' ? 'right-5' : 'left-5'
-        }`}
-      >
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-gold/30" />
-            <div className="w-px h-4 bg-gold/15" />
-          </div>
-        ))}
-      </div>
     </div>
   )
 }
@@ -244,112 +171,80 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
 
   return (
     <div className="envelope-wrapper fixed inset-0 h-screen w-screen overflow-hidden">
-      {/* Cream textured background */}
+      {/* ── Deep burgundy velvet background ─────────────────────────── */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(175deg, #fefcf5 0%, #faf5ea 40%, #f8f1e0 100%)',
+          background: 'radial-gradient(ellipse at 50% 40%, #4a0e1e 0%, #2d0a14 40%, #1a0610 100%)',
         }}
       />
 
-      {/* Subtle paper texture overlay */}
+      {/* ── Damask rose pattern overlay ─────────────────────────────── */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
-          backgroundImage:
-            'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23c9a227\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23f5e6a3' stroke-width='0.8'%3E%3Ccircle cx='100' cy='100' r='8'/%3E%3Ccircle cx='100' cy='100' r='16'/%3E%3Ccircle cx='100' cy='100' r='28'/%3E%3Cpath d='M100 72 Q108 85 100 92 Q92 85 100 72Z'/%3E%3Cpath d='M100 108 Q108 115 100 128 Q92 115 100 108Z'/%3E%3Cpath d='M72 100 Q85 92 92 100 Q85 108 72 100Z'/%3E%3Cpath d='M108 100 Q115 92 128 100 Q115 108 108 100Z'/%3E%3Cpath d='M78 78 Q90 85 88 92 Q82 90 78 78Z'/%3E%3Cpath d='M122 78 Q110 85 112 92 Q118 90 122 78Z'/%3E%3Cpath d='M78 122 Q90 115 88 108 Q82 110 78 122Z'/%3E%3Cpath d='M122 122 Q110 115 112 108 Q118 110 122 122Z'/%3E%3Cpath d='M100 60 Q106 68 100 72 Q94 68 100 60Z'/%3E%3Cpath d='M100 128 Q106 136 100 140 Q94 136 100 128Z'/%3E%3Cpath d='M60 100 Q68 94 72 100 Q68 106 60 100Z'/%3E%3Cpath d='M128 100 Q136 94 140 100 Q136 106 128 100Z'/%3E%3Ccircle cx='100' cy='60' r='3' fill='%23f5e6a3' fill-opacity='0.3'/%3E%3Ccircle cx='100' cy='140' r='3' fill='%23f5e6a3' fill-opacity='0.3'/%3E%3Ccircle cx='60' cy='100' r='3' fill='%23f5e6a3' fill-opacity='0.3'/%3E%3Ccircle cx='140' cy='100' r='3' fill='%23f5e6a3' fill-opacity='0.3'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '200px 200px',
         }}
         aria-hidden="true"
       />
 
-      {/* ── Left Gate Door ────────────────────────────────────────── */}
-      <motion.div
-        animate={{ x: phase === 'opening' ? '-100%' : 0 }}
-        transition={{ duration: OPEN_S, ease: [0.77, 0, 0.175, 1] }}
-        className="absolute inset-y-0 left-0 w-1/2"
+      {/* ── Velvet texture noise ────────────────────────────────────── */}
+      <div
+        className="absolute inset-0 opacity-20 mix-blend-soft-light"
         style={{
-          background: 'linear-gradient(135deg, #fefcf5 0%, #faf6ec 50%, #f5edd5 100%)',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
         }}
+        aria-hidden="true"
+      />
+
+      {/* ── Vignette effect ────────────────────────────────────────── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(10,3,6,0.6) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Baroque corner ornaments ───────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.2, ease: 'easeOut' }}
+        className="pointer-events-none absolute inset-0 z-10"
+        aria-hidden="true"
       >
-        <DoorOrnaments side="left" />
+        {/* Top-left */}
+        <BaroqueCorner className="absolute top-2 left-2 w-28 h-28 sm:w-36 sm:h-36" />
+        {/* Top-right */}
+        <BaroqueCorner className="absolute top-2 right-2 w-28 h-28 sm:w-36 sm:h-36 -scale-x-100" />
+        {/* Bottom-left */}
+        <BaroqueCorner className="absolute bottom-2 left-2 w-28 h-28 sm:w-36 sm:h-36 -scale-y-100" />
+        {/* Bottom-right */}
+        <BaroqueCorner className="absolute bottom-2 right-2 w-28 h-28 sm:w-36 sm:h-36 -scale-x-100 -scale-y-100" />
       </motion.div>
 
-      {/* ── Right Gate Door ───────────────────────────────────────── */}
-      <motion.div
-        animate={{ x: phase === 'opening' ? '100%' : 0 }}
-        transition={{ duration: OPEN_S, ease: [0.77, 0, 0.175, 1] }}
-        className="absolute inset-y-0 right-0 w-1/2"
+      {/* ── Gold border lines ──────────────────────────────────────── */}
+      <div
+        className="absolute inset-3 sm:inset-4 pointer-events-none z-[8] rounded-sm"
         style={{
-          background: 'linear-gradient(225deg, #fefcf5 0%, #faf6ec 50%, #f5edd5 100%)',
-        }}
-      >
-        <DoorOrnaments side="right" />
-      </motion.div>
-
-      {/* ── Golden light burst on opening ─────────────────────────── */}
-      <motion.div
-        animate={{
-          opacity: phase === 'opening' ? [0, 0.9, 0] : 0,
-          scale: phase === 'opening' ? [0.3, 2, 3.5] : 0.3,
-        }}
-        transition={{ duration: OPEN_S * 1.2, times: [0, 0.3, 1], ease: 'easeOut' }}
-        className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(233,205,122,0.6) 0%, rgba(201,162,39,0.2) 40%, transparent 70%)',
+          border: '1px solid rgba(201, 162, 39, 0.15)',
         }}
         aria-hidden="true"
       />
 
-      {/* ── Conic light rays on opening ───────────────────────────── */}
-      <motion.div
-        animate={{
-          opacity: phase === 'opening' ? [0, 0.5, 0] : 0,
-          rotate: phase === 'opening' ? 120 : 0,
-        }}
-        transition={{ duration: OPEN_S * 1.3, times: [0, 0.35, 1], ease: 'easeOut' }}
-        className="pointer-events-none absolute inset-0 blur-sm"
-        style={{
-          background:
-            'conic-gradient(from 0deg, transparent 0deg, rgba(233,205,122,0.4) 8deg, transparent 16deg, transparent 45deg, rgba(233,205,122,0.4) 53deg, transparent 61deg, transparent 90deg, rgba(233,205,122,0.4) 98deg, transparent 106deg, transparent 135deg, rgba(233,205,122,0.4) 143deg, transparent 151deg, transparent 180deg, rgba(233,205,122,0.4) 188deg, transparent 196deg, transparent 225deg, rgba(233,205,122,0.4) 233deg, transparent 241deg, transparent 270deg, rgba(233,205,122,0.4) 278deg, transparent 286deg, transparent 315deg, rgba(233,205,122,0.4) 323deg, transparent 331deg, transparent 360deg)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Couple names revealed behind gates ────────────────────── */}
-      <AnimatePresence>
-        {phase === 'opening' && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: OPEN_S * 0.6, delay: OPEN_S * 0.3, ease: 'easeOut' }}
-            className="pointer-events-none absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
-          >
-            <p className="font-bangla text-sm tracking-wider text-gold/80">শুভ বিবাহ</p>
-            <p className="font-script text-4xl text-ink">{couple.brideName}</p>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-10 bg-gold-light" />
-              <span className="text-xs uppercase tracking-widest text-gold">&amp;</span>
-              <span className="h-px w-10 bg-gold-light" />
-            </div>
-            <p className="font-script text-4xl text-ink">{couple.groomName}</p>
-            <p className="mt-1 font-serif text-xs tracking-[0.3em] text-gold/70">{couple.dateBanner}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ── Floating gold particles (only when closed) ────────────── */}
+      {/* ── Floating gold particles ────────────────────────────────── */}
       {phase === 'closed' && <GoldParticles />}
 
       {/* ── Top decorative text ────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 1 }}
-        className="absolute left-1/2 top-[12%] -translate-x-1/2 text-center pointer-events-none z-20"
+        transition={{ delay: 0.8, duration: 1 }}
+        className="absolute left-1/2 top-[10%] -translate-x-1/2 text-center pointer-events-none z-20"
       >
-        <p className="font-bangla text-sm text-gold/60 tracking-wider">
+        <p className="font-bangla text-sm text-gold/70 tracking-wider">
           শুভ বিবাহ
         </p>
         <p className="font-serif text-[10px] uppercase tracking-[0.4em] text-gold/40 mt-1">
@@ -357,148 +252,174 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
         </p>
       </motion.div>
 
-      {/* ── Mandala behind the seal ────────────────────────────────── */}
+      {/* ── The Envelope ───────────────────────────────────────────── */}
       <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[5]"
-        initial={{ opacity: 0, scale: 0.6, rotate: -30 }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={
           phase === 'closed'
-            ? { opacity: 1, scale: 1, rotate: 0 }
-            : { opacity: 0, scale: 1.8, rotate: 45 }
+            ? { opacity: 1, scale: 1, y: 0 }
+            : { opacity: 0, scale: 1.2, y: -40 }
         }
         transition={
           phase === 'closed'
-            ? { duration: 1.5, ease: 'easeOut' }
-            : { duration: OPEN_S * 0.6 }
-        }
-      >
-        {/* Slowly rotating mandala */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-        >
-          <Mandala className="w-64 h-64 sm:w-72 sm:h-72 text-gold" />
-        </motion.div>
-      </motion.div>
-
-      {/* ── Second mandala ring (counter-rotating, more transparent) ─ */}
-      <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[4]"
-        initial={{ opacity: 0, scale: 0.5, rotate: 30 }}
-        animate={
-          phase === 'closed'
-            ? { opacity: 0.4, scale: 1.15, rotate: 0 }
-            : { opacity: 0, scale: 2, rotate: -30 }
-        }
-        transition={
-          phase === 'closed'
-            ? { duration: 1.8, ease: 'easeOut', delay: 0.3 }
+            ? { duration: 1, delay: 0.4, ease: 'easeOut' }
             : { duration: OPEN_S * 0.5 }
         }
       >
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+        <button
+          type="button"
+          onClick={handleClick}
+          aria-label="Tap the envelope to open the invitation"
+          className="relative cursor-pointer group"
+          style={{ outline: 'none', border: 'none', background: 'none' }}
         >
-          <Mandala className="w-72 h-72 sm:w-80 sm:h-80 text-gold-light" />
-        </motion.div>
+          {/* Envelope shadow */}
+          <div
+            className="absolute -inset-4 rounded-lg"
+            style={{
+              background: 'radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%)',
+              filter: 'blur(15px)',
+              transform: 'translateY(8px)',
+            }}
+          />
+
+          {/* Envelope body */}
+          <div
+            className="relative w-[280px] h-[180px] sm:w-[320px] sm:h-[200px] rounded-sm overflow-hidden"
+            style={{
+              background: 'linear-gradient(145deg, #f5efe0 0%, #ede4d0 30%, #e8dcc5 60%, #e2d5ba 100%)',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.35), 0 2px 10px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4)',
+            }}
+          >
+            {/* Paper texture on envelope */}
+            <div
+              className="absolute inset-0 opacity-40"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)' opacity='0.15'/%3E%3C/svg%3E")`,
+              }}
+            />
+
+            {/* Envelope flap (triangle) */}
+            <div
+              className="absolute top-0 left-0 right-0"
+              style={{
+                height: '55%',
+                clipPath: 'polygon(0 0, 50% 65%, 100% 0)',
+                background: 'linear-gradient(180deg, #e8dcc5 0%, #ddd0b5 50%, #d5c8a8 100%)',
+                borderBottom: '1px solid rgba(180, 160, 120, 0.3)',
+              }}
+            />
+
+            {/* Envelope fold lines from bottom corners to center */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+              {/* Left fold line */}
+              <line
+                x1="0" y1="100%" x2="50%" y2="35%"
+                stroke="rgba(180, 160, 120, 0.25)"
+                strokeWidth="1"
+              />
+              {/* Right fold line */}
+              <line
+                x1="100%" y1="100%" x2="50%" y2="35%"
+                stroke="rgba(180, 160, 120, 0.25)"
+                strokeWidth="1"
+              />
+            </svg>
+
+            {/* ── Wax Seal ─────────────────────────────────────────── */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 z-10"
+              style={{ top: '28%' }}
+              animate={
+                phase === 'closed'
+                  ? { scale: [1, 1.04, 1] }
+                  : {}
+              }
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <div
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
+                style={{
+                  background: 'conic-gradient(from 0deg, #8B4513, #a0522d 20%, #cd853f 40%, #a0522d 60%, #8B4513 80%, #6b3410 100%)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 3px rgba(255,255,255,0.2)',
+                  border: '2px solid rgba(139,69,19,0.6)',
+                }}
+              >
+                <div
+                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
+                  style={{
+                    background: 'radial-gradient(circle at 35% 30%, #cd853f, #8B4513 70%, #6b3410 100%)',
+                    boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2)',
+                  }}
+                >
+                  <span className="font-serif text-sm sm:text-base font-semibold tracking-wider" style={{ color: '#f5e6a3', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
+                    S<span className="mx-[2px] opacity-50">|</span>A
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </button>
       </motion.div>
 
-      {/* ── Pulsating glow behind the seal ─────────────────────────── */}
+      {/* ── Golden light burst on opening ─────────────────────────── */}
       <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[3]"
-        animate={
-          phase === 'closed'
-            ? {
-                boxShadow: [
-                  '0 0 40px 10px rgba(201,162,39,0.15)',
-                  '0 0 60px 20px rgba(201,162,39,0.25)',
-                  '0 0 40px 10px rgba(201,162,39,0.15)',
-                ],
-              }
-            : { opacity: 0 }
-        }
-        transition={
-          phase === 'closed'
-            ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
-            : { duration: 0.5 }
-        }
-        style={{ width: 120, height: 120, borderRadius: '50%' }}
+        animate={{
+          opacity: phase === 'opening' ? [0, 0.8, 0] : 0,
+          scale: phase === 'opening' ? [0.3, 2, 3.5] : 0.3,
+        }}
+        transition={{ duration: OPEN_S * 1.2, times: [0, 0.3, 1], ease: 'easeOut' }}
+        className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full z-30"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(233,205,122,0.6) 0%, rgba(201,162,39,0.2) 40%, transparent 70%)',
+        }}
         aria-hidden="true"
       />
 
-      {/* ── The gold seal button — S | A ──────────────────────────── */}
-      <motion.button
-        type="button"
-        onClick={handleClick}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={
-          phase === 'closed'
-            ? { opacity: 1, scale: [0, 1.1, 1] }
-            : { scale: [1, 1.4, 0], opacity: [1, 1, 0] }
-        }
-        transition={
-          phase === 'closed'
-            ? { duration: 0.8, delay: 0.8, ease: 'easeOut' }
-            : { duration: OPEN_S * 0.5 }
-        }
-        whileHover={
-          phase === 'closed'
-            ? { scale: 1.08, transition: { type: 'spring', stiffness: 300, damping: 15 } }
-            : undefined
-        }
-        whileTap={
-          phase === 'closed'
-            ? { scale: 0.92, transition: { type: 'spring', stiffness: 500, damping: 15 } }
-            : undefined
-        }
-        aria-label="Tap the seal to open the invitation"
-        className="absolute left-1/2 top-1/2 z-20 flex h-[88px] w-[88px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full shadow-[0_4px_30px_rgba(201,162,39,0.45)]"
-        style={{
-          background: 'conic-gradient(from 0deg, #b8860b, #e2c25a 30%, #f5e6a3 50%, #e2c25a 70%, #b8860b 100%)',
-          border: '3px solid rgba(233,205,122,0.7)',
-        }}
-      >
-        {/* Inner circle with text */}
-        <div
-          className="flex h-[72px] w-[72px] items-center justify-center rounded-full"
-          style={{
-            background: 'radial-gradient(circle at 35% 30%, #e8d078, #b8860b 90%)',
-            boxShadow: 'inset 0 2px 6px rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.15)',
-          }}
-        >
-          <span className="font-serif text-xl font-semibold tracking-wider text-cream/95">
-            S<span className="mx-[3px] text-cream/50">|</span>A
-          </span>
-        </div>
-      </motion.button>
+      {/* ── Couple names revealed on opening ──────────────────────── */}
+      <AnimatePresence>
+        {phase === 'opening' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: OPEN_S * 0.6, delay: OPEN_S * 0.3, ease: 'easeOut' }}
+            className="pointer-events-none absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 z-30"
+          >
+            <p className="font-bangla text-sm tracking-wider text-gold/80">শুভ বিবাহ</p>
+            <p className="font-script text-4xl text-cream">{couple.brideName}</p>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-gold-light" />
+              <span className="text-xs uppercase tracking-widest text-gold">&amp;</span>
+              <span className="h-px w-10 bg-gold-light" />
+            </div>
+            <p className="font-script text-4xl text-cream">{couple.groomName}</p>
+            <p className="mt-1 font-serif text-xs tracking-[0.3em] text-gold/70">{couple.dateBanner}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* ── Pulse ring animation around the seal ──────────────────── */}
+      {/* ── Pulse ring around envelope ─────────────────────────────── */}
       {phase === 'closed' && (
         <>
           <motion.div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/30 pointer-events-none z-[15]"
-            style={{ width: 100, height: 100 }}
-            animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-gold/20 pointer-events-none z-[15]"
+            style={{ width: 300, height: 210 }}
+            animate={{ scale: [1, 1.15], opacity: [0.5, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
-            aria-hidden="true"
-          />
-          <motion.div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/20 pointer-events-none z-[15]"
-            style={{ width: 100, height: 100 }}
-            animate={{ scale: [1, 1.9], opacity: [0.4, 0] }}
-            transition={{ duration: 2, delay: 0.6, repeat: Infinity, ease: 'easeOut' }}
             aria-hidden="true"
           />
         </>
       )}
 
-      {/* ── Bottom text — "Tap to open" with animation ────────────── */}
+      {/* ── Bottom text — "Tap to open" ────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: phase === 'closed' ? 1 : 0 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-[14%] left-1/2 -translate-x-1/2 text-center z-20"
+        className="absolute bottom-[12%] left-1/2 -translate-x-1/2 text-center z-20"
       >
         <motion.p
           animate={{ y: [0, -4, 0] }}
@@ -507,7 +428,6 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
         >
           Tap to Open
         </motion.p>
-        {/* Small upward arrow */}
         <motion.span
           animate={{ y: [0, -3, 0], opacity: [0.4, 0.8, 0.4] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -517,24 +437,6 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
           ꕥ
         </motion.span>
       </motion.div>
-
-      {/* ── Bottom decorative border ──────────────────────────────── */}
-      <div className="absolute bottom-0 left-0 right-0 h-[3px] pointer-events-none z-20"
-        style={{
-          background: 'linear-gradient(to right, transparent, #c9a227 30%, #e9cd7a 50%, #c9a227 70%, transparent)',
-          opacity: 0.3,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Top decorative border ─────────────────────────────────── */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none z-20"
-        style={{
-          background: 'linear-gradient(to right, transparent, #c9a227 30%, #e9cd7a 50%, #c9a227 70%, transparent)',
-          opacity: 0.3,
-        }}
-        aria-hidden="true"
-      />
     </div>
   )
 }

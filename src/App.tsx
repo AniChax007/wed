@@ -5,10 +5,10 @@ import AudioPlayer from './components/AudioPlayer'
 import Header from './components/Header'
 import CouplePortrait from './components/CouplePortrait'
 import Countdown from './components/Countdown'
+import ScratchReveal from './components/ScratchReveal'
 import ClaspedHands from './components/ClaspedHands'
 import Timeline from './components/Timeline'
 import LocationMap from './components/LocationMap'
-import Guidelines from './components/Guidelines'
 import Petals from './components/Petals'
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
   }
 
   return (
-    <div className="phone-card relative min-h-screen bg-cream">
+    <div className="phone-card relative min-h-screen" style={{ background: 'linear-gradient(180deg, #fffcf5 0%, #fef9f0 30%, #fdf3e2 70%, #fef9f0 100%)' }}>
       <audio ref={audioRef} src="/audio/wedding-song.mp3" loop />
 
       {!isOpen ? (
@@ -47,10 +47,10 @@ function App() {
           <Header />
           <CouplePortrait />
           <Countdown />
+          <ScratchReveal />
           <ClaspedHands />
           <Timeline />
           <LocationMap />
-          <Guidelines />
           <AudioPlayer isPlaying={isPlaying} onToggle={toggleAudio} />
         </>
       )}

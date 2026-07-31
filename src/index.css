@@ -1,17 +1,28 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-cream: #fdfbf7;
-  --color-cream-warm: #faf5ea;
-  --color-blush: #f6d5d9;
-  --color-blush-deep: #e7a8b2;
-  --color-gold: #c9a227;
-  --color-gold-light: #e9cd7a;
-  --color-gold-dark: #a07c1a;
-  --color-ink: #5b2333;
-  --color-maroon: #7b2d3a;
-  --color-vermilion: #e23d28;
+  /* ── Premium Bengali Wedding Palette ──────────────────────────────── */
+  --color-cream: #fef9f0;
+  --color-cream-warm: #fdf3e2;
+  --color-ivory: #fffcf5;
+  --color-blush: #fcd5d8;
+  --color-blush-deep: #f2a3ae;
+  --color-rose: #e88d9a;
+  --color-gold: #d4a12a;
+  --color-gold-light: #f0d06e;
+  --color-gold-dark: #a67c10;
+  --color-gold-bright: #ffd700;
+  --color-ink: #4a1528;
+  --color-maroon: #7a1e34;
+  --color-maroon-deep: #5c0e24;
+  --color-vermilion: #dc3530;
+  --color-vermilion-bright: #f04040;
+  --color-ruby: #9b111e;
+  --color-saffron: #ff9933;
+  --color-emerald: #2d8a5e;
 
+  --font-elsie: 'Elsie', serif;
+  --font-elsie-swash: 'Elsie Swash Caps', serif;
   --font-script: 'Great Vibes', cursive;
   --font-serif: 'Cormorant Garamond', serif;
   --font-bangla: 'Tiro Bangla', serif;
@@ -24,8 +35,65 @@ html {
 body {
   margin: 0;
   background: var(--color-cream);
-  font-family: var(--font-serif);
+  font-family: var(--font-elsie);
   color: var(--color-ink);
+}
+
+/* ── GIF-like Continuous Looping Micro-Animations ─────────────────── */
+
+@keyframes float-gif {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-6px) rotate(-1.5deg);
+  }
+}
+
+@keyframes diya-flicker {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    transform: scale(1);
+  }
+  33% {
+    opacity: 0.82;
+    filter: drop-shadow(0 0 18px rgba(255, 153, 51, 0.9));
+    transform: scale(1.05);
+  }
+  66% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 12px rgba(240, 64, 64, 0.85));
+    transform: scale(0.98);
+  }
+}
+
+@keyframes sway-garland {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.gif-animated {
+  animation: float-gif 4s ease-in-out infinite;
+}
+
+.diya-glow {
+  animation: diya-flicker 2s ease-in-out infinite;
+}
+
+.sway-garland {
+  transform-origin: top center;
+  animation: sway-garland 3.5s ease-in-out infinite;
 }
 
 /* ── Petal rain animations ─────────────────────────────────────────── */
@@ -71,28 +139,32 @@ body {
 .gold-shimmer {
   background: linear-gradient(
     90deg,
-    var(--color-gold) 0%,
-    var(--color-gold-light) 25%,
-    #f5e6a3 50%,
-    var(--color-gold-light) 75%,
-    var(--color-gold) 100%
+    var(--color-gold-dark) 0%,
+    var(--color-gold) 20%,
+    var(--color-gold-bright) 40%,
+    #fff8dc 50%,
+    var(--color-gold-bright) 60%,
+    var(--color-gold) 80%,
+    var(--color-gold-dark) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s ease-in-out infinite;
+  animation: shimmer 3.5s ease-in-out infinite;
 }
 
-/* ── Vermilion dot (sindoor tikli) used on dividers ────────────────── */
+/* ── Vermilion dot (sindoor tikli) with glow ────────────────────────── */
 
 .sindoor-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--color-vermilion);
+  width: 7px;
+  height: 7px;
+  background: radial-gradient(circle, var(--color-vermilion-bright), var(--color-vermilion));
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(226, 61, 40, 0.35);
+  box-shadow:
+    0 0 6px rgba(240, 64, 64, 0.5),
+    0 0 12px rgba(220, 53, 48, 0.25);
 }
 
 /* ── Section divider with Bengali alpona motif ─────────────────────── */
@@ -127,8 +199,9 @@ body {
 .royal-border {
   border: 1px solid var(--color-gold-light);
   box-shadow:
-    0 0 0 1px rgba(201, 162, 39, 0.08),
-    0 4px 20px -4px rgba(201, 162, 39, 0.12);
+    0 0 0 1px rgba(212, 161, 42, 0.12),
+    0 4px 24px -4px rgba(212, 161, 42, 0.18),
+    inset 0 1px 0 rgba(255, 253, 240, 0.4);
 }
 
 /* ── Fade-in-up animation for scroll reveals ───────────────────────── */
@@ -147,17 +220,3 @@ body {
 .fade-in-up {
   animation: fadeInUp 0.8s ease-out both;
 }
-
-/* ── Presents the card like an app on wider screens ────────────────── */
-
-/* @media (min-width: 480px) {
-  .phone-card {
-    max-width: 430px;
-    margin-inline: auto;
-    border-radius: 2.5rem;
-    box-shadow: 0 30px 60px -20px rgba(91, 35, 51, 0.35);
-    overflow: hidden;
-    
-    transform: translateZ(0);
-  }
-} */
