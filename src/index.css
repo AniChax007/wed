@@ -150,15 +150,14 @@ body {
 
 /* ── Presents the card like an app on wider screens ────────────────── */
 
-@media (min-width: 480px) {
+/* @media (min-width: 480px) {
   .phone-card {
     max-width: 430px;
     margin-inline: auto;
     border-radius: 2.5rem;
     box-shadow: 0 30px 60px -20px rgba(91, 35, 51, 0.35);
     overflow: hidden;
-    /* Establishes a containing block so fixed-position children (petals,
-       audio button, RSVP modal) clip to the card instead of the viewport. */
+    
     transform: translateZ(0);
   }
-}
+} */
