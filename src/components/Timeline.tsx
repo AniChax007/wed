@@ -52,6 +52,7 @@ function Timeline() {
       >
         Schedule of Events
       </motion.h2>
+      <OrnamentalDivider />
 
       <div className="mx-auto mt-10 max-w-md sm:max-w-xl lg:max-w-4xl relative z-10">
         {timeline.map((item, i) => (

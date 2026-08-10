@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { MapPin, Navigation } from 'lucide-react'
 import { venue } from '../data'
+import OrnamentalDivider from './OrnamentalDivider'
 
 function LocationMap() {
   return (
@@ -40,6 +41,7 @@ function LocationMap() {
       >
         Event Venues
       </motion.h2>
+      <OrnamentalDivider />
 
       {/* Venues Grid */}
       <div className="mx-auto mt-6 flex flex-col gap-6 max-w-md sm:max-w-xl lg:max-w-4xl lg:flex-row lg:items-start">

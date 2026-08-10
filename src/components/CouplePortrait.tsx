@@ -23,11 +23,11 @@ function CouplePortrait() {
           className="rounded-2xl overflow-hidden border-2 border-gold-light/60"
         >
           {/* Ken Burns slow zoom & pan effect — feels like a video GIF */}
-          <div className="overflow-hidden rounded-xl" style={{ height: '320px' }}>
+          <div className="relative overflow-hidden rounded-xl" style={{ height: '320px' }}>
             <motion.img
               src="/images/romantic-couple.png"
               alt="Susmita & Animesh – romantic Bengali painting"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover photo-filter"
               animate={{
                 scale: [1, 1.08, 1.04, 1.1, 1],
                 x: [0, 8, -5, 3, 0],
@@ -40,6 +40,8 @@ function CouplePortrait() {
               }}
               loading="eager"
             />
+            <div className="photo-vignette" aria-hidden="true" />
+            <div className="photo-grain" aria-hidden="true" />
           </div>
         </motion.div>
 

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { scratchEvents } from '../data'
 import { Sparkles, CheckCircle2 } from 'lucide-react'
+import OrnamentalDivider from './OrnamentalDivider'
 
 /* Small keepsake illustration per event, shown once the card is revealed */
 const revealImages: Record<string, string> = {
@@ -280,6 +281,7 @@ function ScratchReveal() {
           <Sparkles className="w-3.5 h-3.5" /> Interactive Reveal
         </div>
         <h2 className="font-elsie-swash text-4xl font-black gold-shimmer">Scratch to Reveal Dates</h2>
+        <OrnamentalDivider />
         <p className="mt-1 font-elsie text-sm text-cream/75 max-w-xs mx-auto">
           Scratch the velvet cards below with your finger or mouse to unveil the wedding events &amp; venue details!
         </p>

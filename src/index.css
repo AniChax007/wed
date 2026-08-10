@@ -216,6 +216,30 @@ body {
     inset 0 1px 0 rgba(255, 253, 240, 0.4);
 }
 
+/* ── Photo-real treatment: makes flat illustration art read more like a
+   photograph — punchier contrast/saturation on the image, plus a vignette +
+   grain overlay div placed as a sibling (img can't reliably render ::after). ── */
+.photo-filter {
+  filter: contrast(1.15) saturate(1.12) brightness(0.97);
+}
+
+.photo-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(20, 6, 12, 0.38) 100%);
+  mix-blend-mode: multiply;
+}
+
+.photo-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 /* ── Fade-in-up animation for scroll reveals ───────────────────────── */
 
 @keyframes fadeInUp {

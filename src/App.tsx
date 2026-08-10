@@ -9,6 +9,7 @@ import ScratchReveal from './components/ScratchReveal'
 import ClaspedHands from './components/ClaspedHands'
 import Timeline from './components/Timeline'
 import LocationMap from './components/LocationMap'
+import Footer from './components/Footer'
 import Petals from './components/Petals'
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <ClaspedHands />
           <Timeline />
           <LocationMap />
+          <Footer />
           <AudioPlayer isPlaying={isPlaying} onToggle={toggleAudio} />
         </>
       )}
