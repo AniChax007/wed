@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion'
 import { timeline } from '../data'
+import OrnamentalDivider from './OrnamentalDivider'
 
 /* Map each timeline event to an illustration */
 const eventImages: Record<string, string> = {
-  'Gaye Holud': '/images/gaye-holud.png',
-  'Guest Arrival': '/images/couple-wedding.png',
   'Shubho Bibaho': '/images/sindoor-ceremony.png',
   'Preetibhoj': '/images/reception-dinner.png',
 }
@@ -54,7 +53,7 @@ function Timeline() {
         Schedule of Events
       </motion.h2>
 
-      <div className="mx-auto mt-10 max-w-md relative z-10">
+      <div className="mx-auto mt-10 max-w-md sm:max-w-xl lg:max-w-4xl relative z-10">
         {timeline.map((item, i) => (
           <motion.div
             key={item.title}
@@ -100,12 +99,11 @@ function Timeline() {
 
             {/* Event details */}
             <div className="pt-2 text-left flex-1">
-              <p className="font-elsie text-sm font-bold text-gold">{item.time}</p>
               <p className="font-elsie-swash text-xl font-bold text-maroon">{item.title}</p>
               <p className="font-elsie text-sm text-ink/70">{item.subtitle}</p>
 
               {/* Expanded illustration card for key events */}
-              {(item.title === 'Gaye Holud' || item.title === 'Preetibhoj') && eventImages[item.title] && (
+              {item.title === 'Preetibhoj' && eventImages[item.title] && (
                 <motion.div
                   initial={{ opacity: 0, y: 15, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}

@@ -42,19 +42,18 @@ function LocationMap() {
       </motion.h2>
 
       {/* Venues Grid */}
-      <div className="mx-auto mt-6 flex flex-col gap-6 max-w-md">
+      <div className="mx-auto mt-6 flex flex-col gap-6 max-w-md sm:max-w-xl lg:max-w-4xl lg:flex-row lg:items-start">
         {/* Marriage Venue */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-2xl p-5 text-left border border-gold-light/40 bg-white/70 shadow-md relative overflow-hidden"
+          className="rounded-2xl p-5 text-left border border-gold-light/40 bg-white/70 shadow-md relative overflow-hidden lg:flex-1"
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-gold-dark bg-gold/10 px-2.5 py-1 rounded-full border border-gold/20">
-              Marriage &amp; Haldi Venue
+              Marriage Venue
             </span>
-            <span className="text-xs text-ink/50 font-serif">13th Dec</span>
           </div>
 
           <h3 className="font-serif text-xl font-bold text-maroon">
@@ -94,7 +93,7 @@ function LocationMap() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="rounded-2xl p-5 text-left border border-gold-light/40 bg-white/70 shadow-md relative overflow-hidden"
+          className="rounded-2xl p-5 text-left border border-gold-light/40 bg-white/70 shadow-md relative overflow-hidden lg:flex-1"
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-purple-800 bg-purple-100 px-2.5 py-1 rounded-full border border-purple-200">

@@ -125,6 +125,18 @@ body {
   animation-direction: normal, alternate;
 }
 
+/* Colorful confetti piece — same fall/sway physics as .petal, but a solid
+   coloured chip instead of an emoji, for sections that want festive color
+   rather than flower petals. */
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  animation-name: petal-fall, petal-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+}
+
 /* ── Gold shimmer effect ───────────────────────────────────────────── */
 
 @keyframes shimmer {

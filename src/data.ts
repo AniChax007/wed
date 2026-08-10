@@ -19,28 +19,17 @@ export const venue = {
   marriageName: 'Abhinaba Marriage Hall',
   marriageAddress: 'Nari More, Kalna Link Road, Burdwan',
   receptionName: 'Maity Palace',
-  receptionAddress: 'Daspur, PIN 721211',
+  receptionAddress: 'JP38+X23, Daspur, West Bengal 721211',
   mapsEmbedUrl:
     'https://www.google.com/maps?q=Abhinaba+Marriage+Hall+Nari+More+Kalna+Link+Road+Burdwan&output=embed',
   mapsUrl:
     'https://www.google.com/maps/search/?api=1&query=Abhinaba+Marriage+Hall+Nari+More+Kalna+Link+Road+Burdwan',
   receptionMapsUrl:
-    'https://www.google.com/maps/search/?api=1&query=Maity+Palace+Daspur+721211',
+    'https://www.google.com/maps/search/?api=1&query=JP38%2BX23%2C+Daspur%2C+West+Bengal+721211',
   contact: '9007742744 / 7003384848',
 }
 
 export const scratchEvents = [
-  {
-    id: 'haldi',
-    title: 'Gaye Holud',
-    bangla: 'গায়ে হলুদ',
-    date: '13th December',
-    time: '12:00 PM',
-    location: 'Abhinaba Marriage Hall',
-    badge: '13 DEC • 12 PM',
-    icon: '🌼',
-    color: '#eab308',
-  },
   {
     id: 'wedding',
     title: 'Shubho Bibaho',
@@ -66,8 +55,6 @@ export const scratchEvents = [
 ]
 
 export const timeline = [
-  { time: '12:00 PM', title: 'Gaye Holud', subtitle: 'Turmeric Ceremony · 13th Dec' },
-  { time: '6:00 PM', title: 'Guest Arrival', subtitle: '13th Dec' },
   { time: '8:30 PM', title: 'Shubho Bibaho', subtitle: 'Wedding Ceremony · 13th Dec · Abhinaba Marriage Hall' },
   { time: '7:00 PM', title: 'Preetibhoj', subtitle: 'Reception · 15th Dec · Maity Palace, Daspur' },
 ]

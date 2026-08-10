@@ -3,6 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { scratchEvents } from '../data'
 import { Sparkles, CheckCircle2 } from 'lucide-react'
 
+/* Small keepsake illustration per event, shown once the card is revealed */
+const revealImages: Record<string, string> = {
+  wedding: '/images/sindoor-ceremony.png',
+  reception: '/images/reception-dinner.png',
+}
+
+/* Confetti chips scattered behind the section — royal gold/maroon/emerald palette */
+const CONFETTI_COLORS = ['#d4a12a', '#7a1e34', '#2d8a5e', '#f0d06e', '#dc3530', '#ff9933']
+const confettiPieces = Array.from({ length: 18 }).map((_, i) => ({
+  left: `${(i * 53) % 100}%`,
+  size: 6 + ((i * 7) % 10),
+  round: i % 2 === 0,
+  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+  fallDuration: 7 + ((i * 11) % 8),
+  fallDelay: -((i * 4) % 12),
+  swayDuration: 2 + (i % 3),
+}))
+
 /* ── Custom HTML5 Canvas ScratchCard Component (Zero External Dependencies) ── */
 interface CustomScratchCardProps {
   width: number
@@ -217,15 +235,39 @@ function ScratchReveal() {
   }
 
   return (
-    <section className="relative px-6 py-14 text-center overflow-hidden">
-      {/* Ambient glow */}
+    <section
+      className="relative px-6 py-14 text-center overflow-hidden"
+      style={{
+        background: 'radial-gradient(ellipse at 50% 20%, #5c1226 0%, #3f0c1b 55%, #2d0a14 100%)',
+      }}
+    >
+      {/* Ambient gold glow — same velvet-maroon tone as the opening envelope */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-40"
+        className="absolute inset-0 pointer-events-none opacity-70"
         style={{
           background:
-            'radial-gradient(circle at 50% 30%, rgba(212,161,42,0.15) 0%, rgba(122,30,52,0.1) 60%, transparent 80%)',
+            'radial-gradient(circle at 50% 30%, rgba(212,161,42,0.22) 0%, rgba(122,30,52,0.15) 60%, transparent 80%)',
         }}
       />
+
+      {/* Colorful confetti rain, scoped to this section */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {confettiPieces.map((c, i) => (
+          <span
+            key={i}
+            className={`confetti-piece ${c.round ? 'rounded-full' : 'rounded-sm'}`}
+            style={{
+              left: c.left,
+              width: c.size,
+              height: c.size,
+              backgroundColor: c.color,
+              opacity: 0.55,
+              animationDuration: `${c.fallDuration}s, ${c.swayDuration}s`,
+              animationDelay: `${c.fallDelay}s, 0s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Section Header */}
       <motion.div
@@ -234,11 +276,11 @@ function ScratchReveal() {
         viewport={{ once: true }}
         className="relative z-10"
       >
-        <div className="inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold bg-gold/10 border border-gold/30 mb-2">
+        <div className="inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-light bg-gold/15 border border-gold/40 mb-2">
           <Sparkles className="w-3.5 h-3.5" /> Interactive Reveal
         </div>
-        <h2 className="font-elsie-swash text-4xl text-ink font-black">Scratch to Reveal Dates</h2>
-        <p className="mt-1 font-elsie text-sm text-ink/70 max-w-xs mx-auto">
+        <h2 className="font-elsie-swash text-4xl font-black gold-shimmer">Scratch to Reveal Dates</h2>
+        <p className="mt-1 font-elsie text-sm text-cream/75 max-w-xs mx-auto">
           Scratch the velvet cards below with your finger or mouse to unveil the wedding events &amp; venue details!
         </p>
       </motion.div>
@@ -258,20 +300,17 @@ function ScratchReveal() {
               className="relative rounded-2xl overflow-hidden shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, #fffcf5 0%, #fef9f0 100%)',
-                border: isDone
-                  ? '2px solid rgba(212, 161, 42, 0.6)'
-                  : '2px solid rgba(240, 208, 110, 0.3)',
+                border: isDone ? `2px solid ${evt.color}99` : '2px solid rgba(240, 208, 110, 0.3)',
                 boxShadow: isDone
-                  ? '0 8px 30px rgba(212, 161, 42, 0.25)'
+                  ? `0 8px 30px ${evt.color}40`
                   : '0 6px 20px rgba(74, 21, 40, 0.08)',
               }}
             >
-              {/* Card top banner */}
+              {/* Card top banner — blends the maroon base with the event's own color */}
               <div
                 className="flex items-center justify-between px-5 py-2.5"
                 style={{
-                  background:
-                    'linear-gradient(90deg, #3f0c1b 0%, #5c0e24 50%, #3f0c1b 100%)',
+                  background: `linear-gradient(90deg, #3f0c1b 0%, #5c0e24 45%, ${evt.color} 130%)`,
                 }}
               >
                 <div className="flex items-center gap-2">
@@ -287,6 +326,20 @@ function ScratchReveal() {
               <div className="relative p-5 text-center flex flex-col items-center justify-center min-h-[170px]">
                 {/* ── Content revealed underneath canvas ──────────────── */}
                 <div className="flex flex-col items-center justify-center space-y-1.5 w-full">
+                  {isDone && revealImages[evt.id] && (
+                    <motion.img
+                      src={revealImages[evt.id]}
+                      alt=""
+                      aria-hidden="true"
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="w-12 h-12 rounded-full object-cover border-2 shadow-sm"
+                      style={{ borderColor: evt.color, mixBlendMode: 'multiply' }}
+                      loading="lazy"
+                    />
+                  )}
+
                   <motion.div
                     animate={isDone ? { scale: [0.9, 1.05, 1] } : {}}
                     className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm"
@@ -298,10 +351,6 @@ function ScratchReveal() {
                   <h3 className="font-elsie text-2xl font-bold text-maroon pt-1">
                     {evt.date}
                   </h3>
-
-                  <p className="font-elsie text-sm font-semibold text-gold-dark">
-                    ⏰ {evt.time}
-                  </p>
 
                   <div className="pt-2 border-t border-gold-light/30 w-full mt-2">
                     <p className="font-serif text-xs text-ink/60 uppercase tracking-wider">

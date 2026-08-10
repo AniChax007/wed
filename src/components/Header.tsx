@@ -1,33 +1,6 @@
 import { motion } from 'framer-motion'
 import { couple } from '../data'
-
-/* ── Decorative ornamental divider ─────────────────────────────────── */
-function OrnamentalDivider() {
-  return (
-    <div className="flex items-center justify-center gap-3 my-4">
-      <motion.span
-        className="h-px w-12 bg-gradient-to-r from-transparent to-gold-light"
-        initial={{ scaleX: 0, originX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      />
-      <motion.span
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ delay: 0.7, type: 'spring', stiffness: 200 }}
-        className="text-gold text-sm"
-      >
-        ❦
-      </motion.span>
-      <motion.span
-        className="h-px w-12 bg-gradient-to-l from-transparent to-gold-light"
-        initial={{ scaleX: 0, originX: 1 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      />
-    </div>
-  )
-}
+import OrnamentalDivider from './OrnamentalDivider'
 
 function Header() {
   return (
