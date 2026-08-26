@@ -1,16 +1,25 @@
 import { motion } from 'framer-motion'
 import { timeline } from '../data'
 import OrnamentalDivider from './OrnamentalDivider'
+import GarlandBand from './GarlandBand'
 
-/* Map each timeline event to an illustration */
+/* Map each timeline event to a thumbnail illustration */
 const eventImages: Record<string, string> = {
   'Shubho Bibaho': '/images/sindoor-ceremony.png',
   'Preetibhoj': '/images/reception-dinner.png',
 }
 
+/* Larger illustration shown in the expanded card below each event */
+const expandedImages: Record<string, string> = {
+  'Shubho Bibaho': '/images/ritual-icons.jpeg',
+  'Preetibhoj': '/images/reception-dinner.png',
+}
+
 function Timeline() {
   return (
-    <section className="relative px-6 py-16 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
+      <GarlandBand />
+      <div className="relative px-6 pt-6">
       {/* Ambient background glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
@@ -104,7 +113,7 @@ function Timeline() {
               <p className="font-elsie text-sm text-ink/70">{item.subtitle}</p>
 
               {/* Expanded illustration card for key events */}
-              {item.title === 'Preetibhoj' && eventImages[item.title] && (
+              {expandedImages[item.title] && (
                 <motion.div
                   initial={{ opacity: 0, y: 15, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -114,7 +123,7 @@ function Timeline() {
                 >
                   <div className="overflow-hidden rounded-xl flex items-center justify-center" style={{ height: '150px' }}>
                     <motion.img
-                      src={eventImages[item.title]}
+                      src={expandedImages[item.title]}
                       alt={item.title}
                       className="w-full h-full object-contain"
                       style={{ mixBlendMode: 'multiply' }}
@@ -187,6 +196,7 @@ function Timeline() {
           Sailing through life together
         </p>
       </motion.div>
+      </div>
     </section>
   )
 }

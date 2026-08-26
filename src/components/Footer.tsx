@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { couple, venue, weddingDateTime } from '../data'
+import GarlandBand from './GarlandBand'
 
 /* ── Closing footer: deep maroon velvet band, matches the Envelope's tone ── */
 function Footer() {
@@ -11,11 +12,13 @@ function Footer() {
 
   return (
     <footer
-      className="relative px-6 py-14 text-center overflow-hidden"
+      className="relative py-14 text-center overflow-hidden"
       style={{
         background: 'radial-gradient(ellipse at 50% 0%, #5c1226 0%, #3f0c1b 55%, #2d0a14 100%)',
       }}
     >
+      <GarlandBand className="opacity-90" />
+      <div className="px-6 pt-6">
       {/* Diamond monogram, echoing the wax seal on the envelope */}
       <motion.div
         initial={{ opacity: 0, scale: 0.6, rotate: 30 }}
@@ -67,6 +70,7 @@ function Footer() {
       >
         {weddingDate} &middot; {venue.marriageName} &amp; {venue.receptionName}
       </motion.p>
+      </div>
     </footer>
   )
 }

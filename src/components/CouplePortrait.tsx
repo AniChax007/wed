@@ -3,6 +3,24 @@ import { motion } from 'framer-motion'
 function CouplePortrait() {
   return (
     <section className="relative px-6 pb-10 pt-4 flex flex-col items-center overflow-hidden">
+      {/* ── Personalised arch banner (peacocks + marigold garland) ──── */}
+      <motion.div
+        initial={{ opacity: 0, y: -20, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        className="relative mx-auto w-full max-w-md rounded-2xl overflow-hidden royal-border shadow-lg mb-8"
+      >
+        <motion.img
+          src="/images/couple-arch-banner.png"
+          alt="Animesh & Susmita — wedding portrait under a marigold arch"
+          className="w-full h-auto object-cover"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          loading="eager"
+        />
+      </motion.div>
+
       {/* ── Romantic couple painting with Ken Burns cinematic zoom ──── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
@@ -82,55 +100,75 @@ function CouplePortrait() {
         })}
       </motion.div>
 
-      {/* ── Bengali wedding ritual image — clean transparent blending ────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        className="mt-8 relative mx-auto w-48 sm:w-56"
-      >
-        {/* Gentle floating GIF-style animation */}
+      {/* ── Bengali wedding ritual + blessing images, side by side ────── */}
+      <div className="mt-8 flex flex-wrap items-start justify-center gap-6">
         <motion.div
-          animate={{ y: [0, -10, 0], rotate: [0, 2, -2, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="relative w-48 sm:w-56"
         >
-          <img
-            src="/images/wedding-ritual.png"
-            alt="Bengali wedding ritual — couple with rice shower"
-            className="w-full h-auto object-contain drop-shadow-xl"
-            style={{ mixBlendMode: 'multiply' }}
+          {/* Gentle floating GIF-style animation */}
+          <motion.div
+            animate={{ y: [0, -10, 0], rotate: [0, 2, -2, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <img
+              src="/images/wedding-ritual.png"
+              alt="Bengali wedding ritual — couple with rice shower"
+              className="w-full h-auto object-contain drop-shadow-xl"
+              style={{ mixBlendMode: 'multiply' }}
+              loading="lazy"
+            />
+          </motion.div>
+
+          {/* Animated rice particles falling continuously */}
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-gold-light pointer-events-none"
+              style={{
+                width: 3 + (i % 3),
+                height: 3 + (i % 3),
+                left: `${15 + (i * 6)}%`,
+                top: '10%',
+              }}
+              animate={{
+                y: [0, 130 + i * 10],
+                x: [0, (i % 2 === 0 ? 18 : -18)],
+                opacity: [0, 0.9, 0],
+                rotate: [0, 180],
+              }}
+              transition={{
+                duration: 2 + (i % 3) * 0.5,
+                delay: i * 0.3,
+                repeat: Infinity,
+                ease: 'easeIn',
+              }}
+              aria-hidden="true"
+            />
+          ))}
+        </motion.div>
+
+        {/* Bridal blessing illustration, gentle float */}
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.15 }}
+          className="w-40 sm:w-48 rounded-2xl overflow-hidden royal-border shadow-md"
+        >
+          <motion.img
+            src="/images/crown-blessing.jpeg"
+            alt="Bridal blessing — mother placing the ceremonial crown"
+            className="w-full h-auto object-cover"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
             loading="lazy"
           />
         </motion.div>
-
-        {/* Animated rice particles falling continuously */}
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-gold-light pointer-events-none"
-            style={{
-              width: 3 + (i % 3),
-              height: 3 + (i % 3),
-              left: `${15 + (i * 6)}%`,
-              top: '10%',
-            }}
-            animate={{
-              y: [0, 130 + i * 10],
-              x: [0, (i % 2 === 0 ? 18 : -18)],
-              opacity: [0, 0.9, 0],
-              rotate: [0, 180],
-            }}
-            transition={{
-              duration: 2 + (i % 3) * 0.5,
-              delay: i * 0.3,
-              repeat: Infinity,
-              ease: 'easeIn',
-            }}
-            aria-hidden="true"
-          />
-        ))}
-      </motion.div>
+      </div>
 
       {/* Names below in Elsie Swash Caps */}
       <motion.div

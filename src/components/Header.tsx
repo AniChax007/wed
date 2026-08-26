@@ -1,30 +1,42 @@
 import { motion } from 'framer-motion'
 import { couple } from '../data'
 import OrnamentalDivider from './OrnamentalDivider'
+import GarlandBand from './GarlandBand'
 
 function Header() {
   return (
-    <section className="relative px-6 pt-10 pb-8 text-center overflow-hidden">
+    <section className="relative pt-0 pb-8 text-center overflow-hidden">
+      {/* ── Canopy arch banner, opening the card ─────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        className="relative w-full overflow-hidden"
+      >
+        <img src="/images/curtain-arch.png" alt="" aria-hidden="true" className="w-full h-auto object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 60%, var(--color-cream) 100%)' }} />
+      </motion.div>
+      <GarlandBand />
+
+      <div className="relative px-6 pt-6">
       {/* ── Animated banana trees on sides (Transparent blending + Swaying GIF motion) ── */}
       <motion.img
         src="/images/banana-tree.png"
         alt=""
         aria-hidden="true"
-        className="absolute -left-6 top-0 w-28 sm:w-32 opacity-30 pointer-events-none sway-garland"
+        className="absolute -left-6 top-0 w-28 sm:w-32 pointer-events-none sway-garland"
         initial={{ opacity: 0, x: -40, y: 20 }}
-        animate={{ opacity: 0.3, x: 0, y: 0 }}
+        animate={{ opacity: 0.55, x: 0, y: 0 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
-        style={{ filter: 'hue-rotate(-10deg) saturate(0.8)', mixBlendMode: 'multiply' }}
       />
       <motion.img
         src="/images/banana-tree.png"
         alt=""
         aria-hidden="true"
-        className="absolute -right-6 top-0 w-28 sm:w-32 opacity-30 pointer-events-none -scale-x-100 sway-garland"
+        className="absolute -right-6 top-0 w-28 sm:w-32 pointer-events-none -scale-x-100 sway-garland"
         initial={{ opacity: 0, x: 40, y: 20 }}
-        animate={{ opacity: 0.3, x: 0, y: 0 }}
+        animate={{ opacity: 0.55, x: 0, y: 0 }}
         transition={{ duration: 1.5, ease: 'easeOut', delay: 0.2 }}
-        style={{ filter: 'hue-rotate(-10deg) saturate(0.8)', mixBlendMode: 'multiply' }}
       />
 
       {/* Subtle radial glow behind the header */}
@@ -36,24 +48,44 @@ function Header() {
         aria-hidden="true"
       />
 
-      {/* ── Animated Sindoor pot (Diya Glow GIF style) ───────────────── */}
+      {/* ── Sindoor pot medallion — framed as a gold locket, not a bare photo ── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.5, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-        className="mx-auto mb-3 w-16 h-16 relative diya-glow flex items-center justify-center"
+        className="mx-auto mb-3 relative w-24 h-24"
       >
-        <motion.img
-          src="/images/sindoor-pot.png"
-          alt="Sindoor pot"
-          className="w-full h-full object-contain drop-shadow-lg"
-          style={{ mixBlendMode: 'multiply' }}
+        {/* Soft glow ring behind the medallion */}
+        <motion.div
+          className="absolute inset-0 rounded-full"
           animate={{
-            rotate: [0, 4, -4, 0],
-            scale: [1, 1.08, 1],
+            boxShadow: [
+              '0 0 20px 4px rgba(255,215,0,0.25)',
+              '0 0 30px 8px rgba(255,153,51,0.35)',
+              '0 0 20px 4px rgba(255,215,0,0.25)',
+            ],
           }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         />
+        <motion.div
+          className="absolute inset-0 rounded-full overflow-hidden"
+          style={{
+            border: '3px solid transparent',
+            backgroundImage:
+              'linear-gradient(#fffcf5, #fffcf5), linear-gradient(145deg, #ffd700, #d4a12a 50%, #ffd700)',
+            backgroundOrigin: 'border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: '0 4px 16px rgba(74,21,40,0.25), inset 0 1px 2px rgba(255,255,255,0.6)',
+          }}
+          animate={{ rotate: [0, 3, -3, 0], scale: [1, 1.04, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <img
+            src="/images/sindoor-pot.png"
+            alt="Sindoor pot"
+            className="w-full h-full object-cover scale-125"
+          />
+        </motion.div>
       </motion.div>
 
       {/* শুভ বিবাহ (Shubho Bibaho) */}
@@ -88,26 +120,31 @@ function Header() {
 
       <OrnamentalDivider />
 
-      {/* Couple names with Elsie Swash Caps font */}
-      <motion.h1
+      {/* Couple names — framed as a soft nameplate card */}
+      <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 220, damping: 16, delay: 0.2 }}
-        className="font-elsie-swash text-4xl sm:text-5xl font-black leading-tight tracking-wide"
+        className="relative mx-auto max-w-xs rounded-2xl royal-border px-6 py-5"
+        style={{ background: 'linear-gradient(145deg, rgba(255,215,0,0.06) 0%, rgba(252,213,216,0.15) 100%)' }}
       >
-        <span className="gold-shimmer">{couple.brideName}</span>
-        <br />
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="text-2xl font-serif tracking-widest text-gold/60 my-1 inline-block"
-        >
-          &amp;
-        </motion.span>
-        <br />
-        <span className="gold-shimmer">{couple.groomName}</span>
-      </motion.h1>
+        <span className="absolute left-3 top-2 text-gold-light/50 text-sm" aria-hidden="true">❦</span>
+        <span className="absolute right-3 bottom-2 text-gold-light/50 text-sm" aria-hidden="true">❦</span>
+        <h1 className="font-elsie-swash text-4xl sm:text-5xl font-black leading-tight tracking-wide">
+          <span className="gold-shimmer">{couple.brideName}</span>
+          <br />
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="text-2xl text-gold my-1 inline-block"
+          >
+            ❈
+          </motion.span>
+          <br />
+          <span className="gold-shimmer">{couple.groomName}</span>
+        </h1>
+      </motion.div>
 
       <OrnamentalDivider />
 
@@ -126,6 +163,7 @@ function Header() {
         </div>
         <p className="font-elsie italic text-ink/80 text-sm font-semibold">{couple.quote}</p>
       </motion.div>
+      </div>
     </section>
   )
 }

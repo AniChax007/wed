@@ -8,7 +8,15 @@ const cards = [
 
 function Guidelines() {
   return (
-    <section className="grid gap-4 px-6 py-16 sm:mx-auto sm:max-w-md">
+    <section className="relative grid gap-4 px-6 py-16 sm:mx-auto sm:max-w-md overflow-hidden">
+      {/* Ornamental floral frame, faded into the background */}
+      <img
+        src="/images/floral-frame.jpeg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-fill opacity-[0.07] pointer-events-none"
+      />
+
       {cards.map((card, i) => (
         <motion.div
           key={card.title}

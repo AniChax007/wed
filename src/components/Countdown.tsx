@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { weddingDateTime } from '../data'
+import OrnamentalDivider from './OrnamentalDivider'
 
 function getRemaining() {
   const diff = Math.max(0, new Date(weddingDateTime).getTime() - Date.now())
@@ -58,16 +59,38 @@ function Countdown() {
         aria-hidden="true"
       />
 
+      {/* Diya glow icon, matching Header's motif language */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="mx-auto mb-2 text-2xl diya-glow"
+      >
+        🪔
+      </motion.div>
+
       <motion.p
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="font-serif text-sm uppercase tracking-widest text-gold-light"
+        className="font-bangla text-base text-gold-light/90 tracking-wide"
+      >
+        বিবাহের শুভক্ষণ আসছে
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="font-serif text-sm uppercase tracking-widest text-gold-light/70 mt-1"
       >
         The Celebration Begins In
       </motion.p>
 
-      <div className="mx-auto mt-5 flex max-w-sm items-start justify-center gap-2">
+      <div className="mx-auto mt-2">
+        <OrnamentalDivider glyph="✦" />
+      </div>
+
+      <div className="mx-auto mt-3 flex max-w-sm items-start justify-center gap-2">
         {boxes.map((box, i) => (
           <div key={box.label} className="flex items-start">
             <motion.div
@@ -75,16 +98,16 @@ function Countdown() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -3 }}
             >
               <div
-                className="rounded-xl px-3 py-2 min-w-[60px]"
+                className="royal-border rounded-xl px-3 py-2 min-w-[60px]"
                 style={{
-                  background: 'linear-gradient(145deg, rgba(255,215,0,0.12) 0%, rgba(240,208,110,0.08) 100%)',
-                  border: '1px solid rgba(240,208,110,0.2)',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,253,240,0.1)',
+                  background: 'linear-gradient(145deg, rgba(255,215,0,0.16) 0%, rgba(240,208,110,0.08) 100%)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,253,240,0.15)',
                 }}
               >
-                <p className="font-serif text-3xl font-bold sm:text-4xl" style={{ color: '#ffd700', textShadow: '0 0 20px rgba(255,215,0,0.3)' }}>
+                <p className="font-serif text-3xl font-bold sm:text-4xl gold-shimmer">
                   {String(box.value).padStart(2, '0')}
                 </p>
               </div>
@@ -92,12 +115,12 @@ function Countdown() {
             </motion.div>
             {i < boxes.length - 1 && (
               <motion.p
-                animate={{ opacity: [1, 0.3, 1] }}
+                animate={{ opacity: [1, 0.3, 1], scale: [1, 1.15, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
-                className="px-1 pt-3 font-serif text-2xl sm:text-3xl"
+                className="px-1 pt-3 text-lg sm:text-xl"
                 style={{ color: '#f0d06e' }}
               >
-                :
+                ❈
               </motion.p>
             )}
           </div>
