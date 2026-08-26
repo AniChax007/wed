@@ -32,7 +32,7 @@ function Guidelines() {
             boxShadow: '0 4px 20px -4px rgba(212,161,42,0.12), 0 0 0 1px rgba(240,208,110,0.08)',
           }}
         >
-          <span className="text-2xl">{card.emoji}</span>
+          <span className="text-2xl inline-block gif-animated">{card.emoji}</span>
           <h3 className="font-serif text-lg font-bold text-maroon mt-1">{card.title}</h3>
           <p className="mt-1 text-sm text-ink/70 leading-relaxed">{card.text}</p>
         </motion.div>
