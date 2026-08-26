@@ -5,14 +5,12 @@ import GarlandBand from './GarlandBand'
 
 /* Map each timeline event to a thumbnail illustration */
 const eventImages: Record<string, string> = {
-  'Shubho Bibaho': '/images/sindoor-ceremony.png',
-  'Preetibhoj': '/images/reception-dinner.png',
+  'Reception': '/images/reception-dinner.png',
 }
 
 /* Larger illustration shown in the expanded card below each event */
 const expandedImages: Record<string, string> = {
-  'Shubho Bibaho': '/images/ritual-icons.jpeg',
-  'Preetibhoj': '/images/reception-dinner.png',
+  'Reception': '/images/reception-dinner.png',
 }
 
 function Timeline() {
@@ -141,61 +139,6 @@ function Timeline() {
           </motion.div>
         ))}
       </div>
-
-      {/* ── Boat illustration at the bottom — transparent background blending ─────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="mt-12 mx-auto max-w-xs relative rounded-2xl p-2"
-        style={{
-          background: 'linear-gradient(180deg, rgba(254,249,240,0.6) 0%, rgba(253,243,226,0.9) 100%)',
-          border: '1px solid rgba(240, 208, 110, 0.3)',
-          boxShadow: '0 6px 20px rgba(74, 21, 40, 0.06)',
-        }}
-      >
-        {/* Water shimmer effect behind boat */}
-        <motion.div
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 w-4/5 h-8 rounded-full -z-10"
-          style={{
-            background: 'radial-gradient(ellipse, rgba(212,161,42,0.25) 0%, transparent 70%)',
-          }}
-          animate={{ scaleX: [1, 1.15, 1], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-        />
-
-        {/* Boat with gentle rocking GIF animation & multiply blend */}
-        <motion.div
-          animate={{
-            y: [0, -8, 0],
-            rotate: [0, 1.8, -1.8, 0],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="overflow-hidden rounded-xl"
-        >
-          <img
-            src="/images/couple-boat.png"
-            alt="Bengali couple on a decorated boat"
-            className="w-full h-auto object-contain"
-            style={{ mixBlendMode: 'multiply' }}
-            loading="lazy"
-          />
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center font-bangla text-base text-maroon font-semibold mt-3"
-        >
-          একসাথে জীবনের নৌকায় ভেসে চলা
-        </motion.p>
-        <p className="text-center font-elsie text-xs italic text-ink/60 mt-0.5">
-          Sailing through life together
-        </p>
-      </motion.div>
       </div>
     </section>
   )
