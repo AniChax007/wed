@@ -390,29 +390,6 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
         </>
       )}
 
-      {/* ── Bottom text — "Tap to open" ────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: phase === 'closed' ? 1 : 0 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-[6%] left-1/2 -translate-x-1/2 text-center z-20"
-      >
-        <motion.p
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="font-serif text-[11px] uppercase tracking-[0.22em] text-maroon/60"
-        >
-          Tap to Open
-        </motion.p>
-        <motion.span
-          animate={{ y: [0, -3, 0], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="mt-1 block text-maroon/40 text-base"
-          aria-hidden="true"
-        >
-          ꕥ
-        </motion.span>
-      </motion.div>
     </div>
   )
 }

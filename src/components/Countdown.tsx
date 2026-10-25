@@ -31,21 +31,27 @@ function Countdown() {
   return (
     <section
       className="relative px-6 pb-16 pt-10 text-center overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, #5c0e24 0%, #7a1e34 40%, #8f2540 60%, #5c0e24 100%)',
-      }}
+      style={{ background: '#f7f0e5' }}
     >
+      <img
+        src="/images/pexels-floral-mandap.jpeg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-[#fffdf8]/75" aria-hidden="true" />
       {/* Decorative gold lines */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px]"
         style={{
-          background: 'linear-gradient(to right, transparent, #f0d06e 30%, #ffd700 50%, #f0d06e 70%, transparent)',
+          background: 'linear-gradient(to right, transparent, #9b263b 30%, #d4a12a 50%, #9b263b 70%, transparent)',
         }}
       />
       <div
         className="absolute bottom-0 left-0 right-0 h-[2px]"
         style={{
-          background: 'linear-gradient(to right, transparent, #f0d06e 30%, #ffd700 50%, #f0d06e 70%, transparent)',
+          background: 'linear-gradient(to right, transparent, #9b263b 30%, #d4a12a 50%, #9b263b 70%, transparent)',
         }}
       />
 
@@ -64,7 +70,7 @@ function Countdown() {
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="mx-auto mb-2 text-2xl diya-glow"
+        className="relative mx-auto mb-2 text-2xl"
       >
         🪔
       </motion.div>
@@ -73,7 +79,7 @@ function Countdown() {
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="font-bangla text-base text-gold-light/90 tracking-wide"
+        className="relative font-bangla text-base text-maroon tracking-wide"
       >
         বিবাহের শুভক্ষণ আসছে
       </motion.p>
@@ -81,16 +87,16 @@ function Countdown() {
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="font-serif text-sm uppercase tracking-widest text-gold-light/70 mt-1"
+        className="relative font-serif text-sm uppercase tracking-widest text-maroon/70 mt-1"
       >
         The Celebration Begins In
       </motion.p>
 
-      <div className="mx-auto mt-2">
+      <div className="relative mx-auto mt-2">
         <OrnamentalDivider glyph="✦" />
       </div>
 
-      <div className="mx-auto mt-3 flex max-w-sm items-start justify-center gap-2">
+      <div className="relative mx-auto mt-3 flex max-w-sm items-start justify-center gap-2">
         {boxes.map((box, i) => (
           <div key={box.label} className="flex items-start">
             <motion.div
@@ -101,13 +107,12 @@ function Countdown() {
               whileHover={{ y: -3 }}
             >
               <div
-                className="royal-border rounded-xl px-3 py-2 min-w-[60px]"
+                className="min-w-[60px] rounded-sm border border-maroon/15 px-3 py-2"
                 style={{
-                  background: 'linear-gradient(145deg, rgba(255,215,0,0.16) 0%, rgba(240,208,110,0.08) 100%)',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,253,240,0.15)',
+                  background: 'rgba(255,253,248,0.86)',
                 }}
               >
-                <p className="font-serif text-3xl font-bold sm:text-4xl gold-shimmer">
+                <p className="font-serif text-3xl font-bold text-maroon sm:text-4xl">
                   {String(box.value).padStart(2, '0')}
                 </p>
               </div>
@@ -117,8 +122,7 @@ function Countdown() {
               <motion.p
                 animate={{ opacity: [1, 0.3, 1], scale: [1, 1.15, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
-                className="px-1 pt-3 text-lg sm:text-xl"
-                style={{ color: '#f0d06e' }}
+                className="px-1 pt-3 text-lg text-gold-dark sm:text-xl"
               >
                 ❈
               </motion.p>

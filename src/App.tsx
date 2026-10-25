@@ -10,7 +10,6 @@ import ClaspedHands from './components/ClaspedHands'
 import Timeline from './components/Timeline'
 import LocationMap from './components/LocationMap'
 import Footer from './components/Footer'
-import Petals from './components/Petals'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,7 +43,6 @@ function App() {
         <Envelope onOpen={handleOpenEnvelope} />
       ) : (
         <>
-          <Petals />
           <Header />
           <CouplePortrait />
           <Countdown />
