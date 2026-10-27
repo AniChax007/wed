@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { timeline } from '../data'
 import OrnamentalDivider from './OrnamentalDivider'
-import GarlandBand from './GarlandBand'
+import AmbientVideo from './AmbientVideo'
 
 /* Map each timeline event to a thumbnail illustration */
 const eventImages: Record<string, string> = {
@@ -16,7 +16,12 @@ const expandedImages: Record<string, string> = {
 function Timeline() {
   return (
     <section className="relative py-16 overflow-hidden">
-      <GarlandBand />
+      <AmbientVideo
+        src="/videos/pexels-floral-arrangement.mp4"
+        poster="/images/pexels-marigold-arrangement.jpeg"
+        className="absolute inset-0 h-full w-full object-cover opacity-25"
+      />
+      <div className="absolute inset-0 bg-[#fffdf8]/80" aria-hidden="true" />
       <div className="relative px-6 pt-6">
       {/* Ambient background glow */}
       <div
@@ -24,30 +29,6 @@ function Timeline() {
         style={{
           background: 'radial-gradient(ellipse at 50% 30%, rgba(254,249,240,0.8) 0%, rgba(253,243,226,0.5) 100%)',
         }}
-      />
-
-      {/* ── Banana trees as entrance decoration on sides (Swaying GIF animation) ── */}
-      <motion.img
-        src="/images/banana-tree.png"
-        alt=""
-        aria-hidden="true"
-        className="absolute left-0 bottom-0 w-24 sm:w-28 opacity-30 pointer-events-none sway-garland"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 0.3, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
-        style={{ mixBlendMode: 'multiply' }}
-      />
-      <motion.img
-        src="/images/banana-tree.png"
-        alt=""
-        aria-hidden="true"
-        className="absolute right-0 bottom-0 w-24 sm:w-28 opacity-30 pointer-events-none -scale-x-100 sway-garland"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 0.3, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, delay: 0.2 }}
-        style={{ mixBlendMode: 'multiply' }}
       />
 
       <motion.h2

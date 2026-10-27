@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { weddingDateTime } from '../data'
 import OrnamentalDivider from './OrnamentalDivider'
+import AmbientVideo from './AmbientVideo'
 
 function getRemaining() {
   const diff = Math.max(0, new Date(weddingDateTime).getTime() - Date.now())
@@ -33,12 +34,10 @@ function Countdown() {
       className="relative px-6 pb-16 pt-10 text-center overflow-hidden"
       style={{ background: '#f7f0e5' }}
     >
-      <img
-        src="/images/pexels-floral-mandap.jpeg"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover opacity-20"
-        loading="lazy"
+      <AmbientVideo
+        src="/videos/pexels-lotus-decor.mp4"
+        poster="/images/pexels-floral-mandap.jpeg"
+        className="absolute inset-0 h-full w-full object-cover opacity-30"
       />
       <div className="absolute inset-0 bg-[#fffdf8]/75" aria-hidden="true" />
       {/* Decorative gold lines */}

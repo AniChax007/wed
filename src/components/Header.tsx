@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { couple } from '../data'
+import AmbientVideo from './AmbientVideo'
 
 function Header() {
   return (
@@ -10,14 +11,9 @@ function Header() {
         transition={{ duration: 1.2 }}
         className="relative h-36 w-full overflow-hidden sm:h-48"
       >
-        <video
+        <AmbientVideo
           src="/videos/pexels-marigold-invitation.mp4"
           poster="/images/pexels-marigold-arrangement.jpeg"
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-hidden="true"
           className="h-full w-full object-cover"
         />
         <div
