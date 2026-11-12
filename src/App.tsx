@@ -3,13 +3,12 @@ import Envelope from './components/Envelope'
 import { ENVELOPE_OPEN_MS } from './data'
 import AudioPlayer from './components/AudioPlayer'
 import Header from './components/Header'
-import CouplePortrait from './components/CouplePortrait'
 import Countdown from './components/Countdown'
 import ScratchReveal from './components/ScratchReveal'
 import ClaspedHands from './components/ClaspedHands'
-import Timeline from './components/Timeline'
 import LocationMap from './components/LocationMap'
 import Footer from './components/Footer'
+import Petals from './components/Petals'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,12 +42,11 @@ function App() {
         <Envelope onOpen={handleOpenEnvelope} />
       ) : (
         <>
+          <Petals show={isOpen} />
           <Header />
-          <CouplePortrait />
           <Countdown />
           <ScratchReveal />
           <ClaspedHands />
-          <Timeline />
           <LocationMap />
           <Footer />
           <AudioPlayer isPlaying={isPlaying} onToggle={toggleAudio} />

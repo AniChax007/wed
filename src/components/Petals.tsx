@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
 
-const PETALS = ['🌸', '🌺', '🌼'] as const
+const PETALS = ['🌸', '🌺', '🌼', '🌹', '✨', '💐'] as const
 
-const particles = Array.from({ length: 14 }).map((_, i) => ({
-  left: `${(i * 71) % 100}%`,
-  size: 14 + ((i * 37) % 14),
-  fallDuration: 9 + ((i * 13) % 8),
-  fallDelay: -((i * 5) % 12),
-  swayDuration: 2.5 + (i % 3),
+const particles = Array.from({ length: 22 }).map((_, i) => ({
+  left: `${(i * 47) % 100}%`,
+  size: 16 + ((i * 31) % 16),
+  fallDuration: 8 + ((i * 11) % 7),
+  fallDelay: -((i * 4) % 14),
+  swayDuration: 2.2 + (i % 3),
   emoji: PETALS[i % PETALS.length],
 }))
 

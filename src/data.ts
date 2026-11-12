@@ -57,7 +57,30 @@ export const scratchEvents = [
 ]
 
 export const timeline = [
-  { time: '7:00 PM', title: 'Reception', subtitle: '15th Dec · Maity Palace, Daspur' },
+  {
+    time: '7:00 PM',
+    title: 'Shubho Drishti & Saat Paak',
+    subtitle: '13th Dec · Abhinaba Marriage Hall, Burdwan',
+    bangla: 'শুভদৃষ্টি ও সাতপাকে বাঁধা',
+    color: '#dc2626',
+    icon: '🌺',
+  },
+  {
+    time: '10:30 PM',
+    title: 'Sindoor Daan & Kanya Sampradan',
+    subtitle: '13th Dec · Sacred Wedding Rituals',
+    bangla: 'সিঁদুরদান ও হস্তবন্ধন',
+    color: '#d4a12a',
+    icon: '🪔',
+  },
+  {
+    time: '7:00 PM Onwards',
+    title: 'Preetibhoj & Reception',
+    subtitle: '15th Dec · Maity Palace, Daspur',
+    bangla: 'প্রীতিভোজ ও বৌভাত',
+    color: '#9333ea',
+    icon: '🎉',
+  },
 ]
 
 export const guidelines = {

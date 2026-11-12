@@ -9,12 +9,12 @@ const cards = [
 function Guidelines() {
   return (
     <section className="relative grid gap-4 px-6 py-16 sm:mx-auto sm:max-w-md overflow-hidden">
-      {/* Ornamental floral frame, faded into the background */}
-      <img
-        src="/images/floral-frame.jpeg"
-        alt=""
+      <div
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-fill opacity-[0.07] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(212,161,42,0.32), transparent 55%)',
+        }}
       />
 
       {cards.map((card, i) => (

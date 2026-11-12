@@ -258,10 +258,12 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
               }}
             />
 
-            <img
-              src="/images/shoot1%20(1).jpeg"
-              alt="Susmita and Animesh together beneath a bridge"
-              className="absolute inset-x-0 top-0 h-[58%] w-full object-cover"
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-[58%] w-full"
+              style={{
+                background: 'linear-gradient(180deg, rgba(212, 161, 42, 0.22) 0%, rgba(122, 30, 52, 0.08) 100%)',
+              }}
             />
             <div
               className="absolute inset-x-0 top-[40%] h-[18%] bg-gradient-to-b from-transparent to-[#fffdf8]"
@@ -301,17 +303,28 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
               style={{ top: '51%' }}
               animate={
                 phase === 'closed'
-                  ? { scale: [1, 1.04, 1] }
+                  ? { scale: [1, 1.06, 1] }
                   : {}
               }
-              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >
+              {/* Pulsing colorful golden aura ring */}
+              {phase === 'closed' && (
+                <motion.span
+                  className="absolute inset-0 -m-2 rounded-full pointer-events-none"
+                  animate={{ scale: [1, 1.6, 1.8], opacity: [0.8, 0.3, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
+                  style={{
+                    background: 'radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,153,51,0.5) 50%, transparent 75%)',
+                  }}
+                />
+              )}
               <div
-                className="w-11 h-11 rounded-full flex items-center justify-center"
+                className="w-12 h-12 rounded-full flex items-center justify-center relative shadow-lg"
                 style={{
-                  background: '#9b263b',
-                  boxShadow: '0 2px 8px rgba(74,21,40,0.2)',
-                  border: '1px solid rgba(255,253,248,0.8)',
+                  background: 'linear-gradient(135deg, #dc2626 0%, #7a1e34 100%)',
+                  boxShadow: '0 0 15px rgba(220,38,38,0.5), inset 0 1px 2px rgba(255,255,255,0.4)',
+                  border: '2px solid rgba(255,215,0,0.85)',
                 }}
               >
                 <div
@@ -321,8 +334,8 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
                     boxShadow: 'inset 0 0 0 1px rgba(255,253,248,0.5)',
                   }}
                 >
-                  <span className="font-serif text-xs font-semibold tracking-wider" style={{ color: '#fff8eb' }}>
-                    S<span className="mx-[2px] opacity-60">&amp;</span>A
+                  <span className="font-serif text-xs font-semibold tracking-wider text-gold-bright">
+                    S<span className="mx-[2px] opacity-70">&amp;</span>A
                   </span>
                 </div>
               </div>

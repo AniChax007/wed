@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 
 interface AmbientVideoProps {
   src: string
-  poster: string
   className: string
 }
 
-function AmbientVideo({ src, poster, className }: AmbientVideoProps) {
+function AmbientVideo({ src, className }: AmbientVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hasEntered, setHasEntered] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -42,7 +41,6 @@ function AmbientVideo({ src, poster, className }: AmbientVideoProps) {
     <video
       ref={videoRef}
       src={hasEntered ? src : undefined}
-      poster={poster}
       preload="none"
       loop
       muted

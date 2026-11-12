@@ -61,8 +61,33 @@ function ClaspedHands() {
         <motion.div
           animate={{ y: [0, -4, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="py-6 px-4 flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center"
         >
+          {/* Clasped Hands Artwork with glowing frame */}
+          <div className="relative mb-5 w-full overflow-hidden rounded-2xl border border-gold-light/40 shadow-lg group">
+            <motion.img
+              src="/images/kanya_sampradan_hands.jpg"
+              alt="Kanya Sampradan Clasped Hands"
+              className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              whileHover={{ scale: 1.04 }}
+            />
+            {/* Ambient holy fire glow */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(180deg, transparent 40%, rgba(63,12,27,0.85) 100%)',
+              }}
+            />
+            {/* Sacred flower floret badge */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-black/40 px-3 py-1 backdrop-blur-sm border border-gold-light/40">
+              <span className="text-xs text-saffron">❀</span>
+              <span className="font-serif text-[11px] uppercase tracking-wider text-gold-light">
+                হস্তবন্ধন ও সপ্তপদী
+              </span>
+              <span className="text-xs text-saffron">❀</span>
+            </div>
+          </div>
+
           <motion.div
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 2.5, repeat: Infinity }}

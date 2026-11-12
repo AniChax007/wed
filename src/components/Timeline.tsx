@@ -3,22 +3,11 @@ import { timeline } from '../data'
 import OrnamentalDivider from './OrnamentalDivider'
 import AmbientVideo from './AmbientVideo'
 
-/* Map each timeline event to a thumbnail illustration */
-const eventImages: Record<string, string> = {
-  'Reception': '/images/reception-dinner.png',
-}
-
-/* Larger illustration shown in the expanded card below each event */
-const expandedImages: Record<string, string> = {
-  'Reception': '/images/reception-dinner.png',
-}
-
 function Timeline() {
   return (
     <section className="relative py-16 overflow-hidden">
       <AmbientVideo
         src="/videos/pexels-floral-arrangement.mp4"
-        poster="/images/pexels-marigold-arrangement.jpeg"
         className="absolute inset-0 h-full w-full object-cover opacity-25"
       />
       <div className="absolute inset-0 bg-[#fffdf8]/80" aria-hidden="true" />
@@ -52,27 +41,21 @@ function Timeline() {
             transition={{ type: 'spring', stiffness: 220, damping: 22, delay: i * 0.12 }}
             className="relative flex gap-4 pb-10 last:pb-0"
           >
-            {/* Timeline node with illustration thumbnail */}
+            {/* Timeline node with colorful animated ring */}
             <div className="flex flex-col items-center">
               <motion.div
-                whileInView={{ scale: [0.6, 1.1, 1] }}
+                whileInView={{ scale: [0.6, 1.15, 1] }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.15 }}
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-gold bg-cream overflow-hidden shadow-md"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 shadow-md bg-cream relative"
+                style={{ borderColor: item.color }}
               >
-                {eventImages[item.title] ? (
-                  <motion.img
-                    src={eventImages[item.title]}
-                    alt={item.title}
-                    className="w-full h-full object-cover object-top"
-                    style={{ mixBlendMode: 'multiply' }}
-                    animate={{ scale: [1, 1.12, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
-                    loading="lazy"
-                  />
-                ) : (
-                  <span className="text-gold text-xl">✦</span>
-                )}
+                <span className="text-xl">{item.icon || '✦'}</span>
+                {/* Glow ring */}
+                <div
+                  className="absolute inset-0 rounded-full opacity-30 pointer-events-none"
+                  style={{ background: item.color }}
+                />
               </motion.div>
               {i < timeline.length - 1 && (
                 <motion.span
@@ -80,42 +63,30 @@ function Timeline() {
                   whileInView={{ scaleY: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.15 + 0.3 }}
-                  className="mt-1 w-px flex-1 bg-gold-light origin-top"
+                  className="mt-1 w-0.5 flex-1 origin-top"
+                  style={{
+                    background: `linear-gradient(to bottom, ${item.color}, ${timeline[i + 1]?.color || '#d4a12a'})`,
+                  }}
                   aria-hidden="true"
                 />
               )}
             </div>
 
             {/* Event details */}
-            <div className="pt-2 text-left flex-1">
-              <p className="font-elsie-swash text-xl font-bold text-maroon">{item.title}</p>
-              <p className="font-elsie text-sm text-ink/70">{item.subtitle}</p>
-
-              {/* Expanded illustration card for key events */}
-              {expandedImages[item.title] && (
-                <motion.div
-                  initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: i * 0.1 + 0.3 }}
-                  className="mt-3 rounded-2xl overflow-hidden border border-gold-light/40 bg-cream-warm/90 p-3 shadow-md"
+            <div className="pt-0.5 text-left flex-1">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span
+                  className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full text-white shadow-sm"
+                  style={{ backgroundColor: item.color }}
                 >
-                  <div className="overflow-hidden rounded-xl flex items-center justify-center" style={{ height: '150px' }}>
-                    <motion.img
-                      src={expandedImages[item.title]}
-                      alt={item.title}
-                      className="w-full h-full object-contain"
-                      style={{ mixBlendMode: 'multiply' }}
-                      animate={{
-                        scale: [1, 1.08, 1],
-                        rotate: [0, 1.5, -1.5, 0],
-                      }}
-                      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                      loading="lazy"
-                    />
-                  </div>
-                </motion.div>
-              )}
+                  {item.time}
+                </span>
+                <span className="font-bangla text-xs text-maroon font-semibold">
+                  {item.bangla}
+                </span>
+              </div>
+              <p className="font-elsie-swash text-xl font-bold text-maroon">{item.title}</p>
+              <p className="font-elsie text-sm text-ink/75 mt-0.5">{item.subtitle}</p>
             </div>
           </motion.div>
         ))}

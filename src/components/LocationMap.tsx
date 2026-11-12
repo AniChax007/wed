@@ -11,26 +11,29 @@ function LocationMap() {
         background: 'linear-gradient(180deg, #fef9f0 0%, #fdf3e2 50%, #fef9f0 100%)',
       }}
     >
-      {/* Decorative banana trees */}
-      <motion.img
-        src="/images/banana-tree.png"
-        alt=""
+      {/* Decorative botanical accents */}
+      <motion.div
         aria-hidden="true"
-        className="absolute -left-4 bottom-0 w-20 opacity-15 pointer-events-none"
+        className="pointer-events-none absolute -left-4 bottom-0 h-20 w-20 opacity-15"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 0.15 }}
         viewport={{ once: true }}
-        style={{ filter: 'saturate(0.6)' }}
+        style={{
+          background: 'radial-gradient(circle at 50% 100%, rgba(97, 145, 79, 0.8), transparent 55%)',
+          borderRadius: '50% 50% 0 0',
+        }}
       />
-      <motion.img
-        src="/images/banana-tree.png"
-        alt=""
+      <motion.div
         aria-hidden="true"
-        className="absolute -right-4 bottom-0 w-20 opacity-15 pointer-events-none -scale-x-100"
+        className="pointer-events-none absolute -right-4 bottom-0 h-20 w-20 opacity-15"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 0.15 }}
         viewport={{ once: true }}
-        style={{ filter: 'saturate(0.6)' }}
+        style={{
+          background: 'radial-gradient(circle at 50% 100%, rgba(97, 145, 79, 0.8), transparent 55%)',
+          borderRadius: '50% 50% 0 0',
+          transform: 'scaleX(-1)',
+        }}
       />
 
       <motion.h2

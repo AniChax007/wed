@@ -4,12 +4,6 @@ import { scratchEvents } from '../data'
 import { CheckCircle2 } from 'lucide-react'
 import OrnamentalDivider from './OrnamentalDivider'
 
-/* Small keepsake illustration per event, shown once the card is revealed */
-const revealImages: Record<string, string> = {
-  wedding: '/images/sindoor-ceremony.png',
-  reception: '/images/reception-dinner.png',
-}
-
 /* ── Custom HTML5 Canvas ScratchCard Component (Zero External Dependencies) ── */
 interface CustomScratchCardProps {
   width: number
@@ -215,6 +209,12 @@ function CustomScratchCard({
   )
 }
 
+/* ── Map each event to its vibrant ritual illustration ───────────────────── */
+const eventArtwork: Record<string, string> = {
+  wedding: '/images/shubho_drishti_colorful.jpg',
+  reception: '/images/bengali_couple_vibrant.jpg',
+}
+
 /* ── Main Scratch Reveal Section ───────────────────────────────────────────── */
 function ScratchReveal() {
   const [revealed, setRevealed] = useState<Record<string, boolean>>({})
@@ -240,8 +240,8 @@ function ScratchReveal() {
         </div>
         <h2 className="font-serif text-3xl font-semibold text-maroon">The Celebration</h2>
         <OrnamentalDivider />
-        <p className="mx-auto mt-1 max-w-xs font-serif text-sm text-ink/70">
-          શુભ પ્રસંગની તારીખ ও স্থান
+        <p className="mx-auto mt-1 max-w-xs font-bangla text-sm text-ink/75">
+          শুভ অনুষ্ঠানের দিনক্ষণ ও স্থান
         </p>
       </motion.div>
 
@@ -249,6 +249,7 @@ function ScratchReveal() {
       <div className="mx-auto mt-8 flex flex-col gap-6 max-w-sm relative z-10">
         {scratchEvents.map((evt, idx) => {
           const isDone = revealed[evt.id]
+          const artwork = eventArtwork[evt.id]
 
           return (
             <motion.div
@@ -257,67 +258,75 @@ function ScratchReveal() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.15, duration: 0.8 }}
-              className="relative overflow-hidden rounded-sm shadow-md"
+              className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500"
               style={{
                 background: 'linear-gradient(135deg, #fffcf5 0%, #fef9f0 100%)',
-                border: isDone ? `1px solid ${evt.color}99` : '1px solid rgba(122, 30, 52, 0.16)',
+                border: isDone ? `2px solid ${evt.color}` : '1px solid rgba(122, 30, 52, 0.2)',
                 boxShadow: isDone
-                  ? `0 8px 30px ${evt.color}40`
-                  : '0 6px 20px rgba(74, 21, 40, 0.08)',
+                  ? `0 12px 35px ${evt.color}35`
+                  : '0 8px 24px rgba(74, 21, 40, 0.08)',
               }}
             >
-              {/* Card top banner — blends the maroon base with the event's own color */}
+              {/* Card top banner */}
               <div
-                className="flex items-center justify-between px-5 py-2.5"
+                className="flex items-center justify-between px-5 py-3 text-white"
                 style={{
-                  background: '#7a1e34',
+                  background: isDone
+                    ? `linear-gradient(90deg, ${evt.color} 0%, #7a1e34 100%)`
+                    : 'linear-gradient(90deg, #7a1e34 0%, #5c0e24 100%)',
                 }}
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-lg">{evt.icon}</span>
-                  <span className="font-serif font-semibold text-sm text-cream tracking-wide">
+                  <span className="text-xl animate-bounce">{evt.icon}</span>
+                  <span className="font-serif font-bold text-sm tracking-wide">
                     {evt.title}
                   </span>
                 </div>
-                <span className="font-bangla text-xs text-cream/80">{evt.bangla}</span>
+                <span className="font-bangla text-xs text-white/90">{evt.bangla}</span>
               </div>
 
               {/* Card body wrapper */}
-              <div className="relative p-5 text-center flex flex-col items-center justify-center min-h-[170px]">
+              <div className="relative p-4 text-center flex flex-col items-center justify-center min-h-[260px]">
                 {/* ── Content revealed underneath canvas ──────────────── */}
-                <div className="flex flex-col items-center justify-center space-y-1.5 w-full">
-                  {isDone && revealImages[evt.id] && (
-                    <motion.img
-                      src={revealImages[evt.id]}
-                      alt=""
-                      aria-hidden="true"
-                      initial={{ opacity: 0, scale: 0.6 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="w-12 h-12 rounded-full object-cover border-2 shadow-sm"
-                      style={{ borderColor: evt.color, mixBlendMode: 'multiply' }}
-                      loading="lazy"
-                    />
+                <div className="flex flex-col items-center justify-center w-full">
+                  {/* Vibrant Ritual Artwork thumbnail on reveal */}
+                  {artwork && (
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={isDone ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="relative w-full h-36 rounded-xl overflow-hidden mb-3 border border-gold-light/40 shadow-inner group"
+                    >
+                      <img
+                        src={artwork}
+                        alt={evt.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-white text-[11px] font-serif">
+                        <span className="bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">
+                          ✨ {evt.time}
+                        </span>
+                        <span className="bg-gold-dark/80 px-2 py-0.5 rounded backdrop-blur-sm text-cream font-bold">
+                          {evt.badge}
+                        </span>
+                      </div>
+                    </motion.div>
                   )}
 
-                  <motion.div
-                    animate={isDone ? { scale: [0.9, 1.05, 1] } : {}}
-                    className="inline-block px-3 py-1 text-xs font-bold text-white"
-                    style={{ backgroundColor: evt.color }}
+                  <motion.h3
+                    animate={isDone ? { scale: [0.95, 1.05, 1] } : {}}
+                    className="font-elsie text-2xl font-bold text-maroon"
                   >
-                    {evt.badge}
-                  </motion.div>
-
-                  <h3 className="font-elsie text-2xl font-bold text-maroon pt-1">
                     {evt.date}
-                  </h3>
+                  </motion.h3>
 
-                  <div className="pt-2 border-t border-gold-light/30 w-full mt-2">
+                  <div className="pt-2 border-t border-gold-light/40 w-full mt-2">
                     <p className="font-serif text-xs text-ink/60 uppercase tracking-wider">
-                      Location
+                      Venue
                     </p>
-                    <p className="font-serif text-sm font-bold text-ink">
-                      📍 {evt.location}
+                    <p className="font-serif text-sm font-bold text-ink flex items-center justify-center gap-1">
+                      <span>📍</span> {evt.location}
                     </p>
                   </div>
                 </div>
@@ -332,7 +341,7 @@ function ScratchReveal() {
                     >
                       <CustomScratchCard
                         width={350}
-                        height={175}
+                        height={265}
                         coverColor="#3f0c1b"
                         finishPercent={35}
                         onComplete={() => handleComplete(evt.id)}
@@ -346,9 +355,9 @@ function ScratchReveal() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="absolute top-2 right-2 text-emerald text-xs font-semibold flex items-center gap-1 bg-emerald/10 px-2.5 py-0.5 rounded-full border border-emerald/20"
+                    className="absolute top-2 right-2 text-emerald-800 text-xs font-semibold flex items-center gap-1 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300 shadow-sm"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Revealed
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Revealed
                   </motion.div>
                 )}
               </div>

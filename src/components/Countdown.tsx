@@ -23,10 +23,10 @@ function Countdown() {
   }, [])
 
   const boxes = [
-    { label: 'Days', value: remaining.days },
-    { label: 'Hours', value: remaining.hours },
-    { label: 'Minutes', value: remaining.minutes },
-    { label: 'Seconds', value: remaining.seconds },
+    { label: 'Days', value: remaining.days, color: '#dc2626', bg: 'linear-gradient(145deg, rgba(220,38,38,0.12), rgba(255,253,248,0.95))' },
+    { label: 'Hours', value: remaining.hours, color: '#d97706', bg: 'linear-gradient(145deg, rgba(217,119,6,0.12), rgba(255,253,248,0.95))' },
+    { label: 'Minutes', value: remaining.minutes, color: '#16a34a', bg: 'linear-gradient(145deg, rgba(22,163,74,0.12), rgba(255,253,248,0.95))' },
+    { label: 'Seconds', value: remaining.seconds, color: '#9333ea', bg: 'linear-gradient(145deg, rgba(147,51,234,0.12), rgba(255,253,248,0.95))' },
   ]
 
   return (
@@ -36,7 +36,6 @@ function Countdown() {
     >
       <AmbientVideo
         src="/videos/pexels-lotus-decor.mp4"
-        poster="/images/pexels-floral-mandap.jpeg"
         className="absolute inset-0 h-full w-full object-cover opacity-30"
       />
       <div className="absolute inset-0 bg-[#fffdf8]/75" aria-hidden="true" />
@@ -103,19 +102,30 @@ function Countdown() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -4, scale: 1.05 }}
+              className="text-center"
             >
               <div
-                className="min-w-[60px] rounded-sm border border-maroon/15 px-3 py-2"
+                className="min-w-[66px] sm:min-w-[76px] rounded-2xl border-2 px-3 py-2.5 shadow-md relative overflow-hidden"
                 style={{
-                  background: 'rgba(255,253,248,0.86)',
+                  background: box.bg,
+                  borderColor: `${box.color}66`,
+                  boxShadow: `0 4px 14px ${box.color}25`,
                 }}
               >
-                <p className="font-serif text-3xl font-bold text-maroon sm:text-4xl">
+                <p
+                  className="font-serif text-3xl font-extrabold sm:text-4xl"
+                  style={{ color: box.color }}
+                >
                   {String(box.value).padStart(2, '0')}
                 </p>
               </div>
-              <p className="mt-1 text-[10px] uppercase tracking-widest text-gold-light/70">{box.label}</p>
+              <p
+                className="mt-1.5 text-[11px] font-bold uppercase tracking-widest"
+                style={{ color: box.color }}
+              >
+                {box.label}
+              </p>
             </motion.div>
             {i < boxes.length - 1 && (
               <motion.p
