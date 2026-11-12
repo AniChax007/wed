@@ -262,7 +262,28 @@ function Envelope({ onOpen }: { onOpen: () => void }) {
               aria-hidden="true"
               className="absolute inset-x-0 top-0 h-[58%] w-full"
               style={{
-                background: 'linear-gradient(180deg, rgba(212, 161, 42, 0.22) 0%, rgba(122, 30, 52, 0.08) 100%)',
+                backgroundImage: 'url("/images/floral-frame.jpeg")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'saturate(1.6) contrast(1.12) brightness(0.95)',
+                transform: 'scale(1.08)',
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-[58%] w-full"
+              style={{
+                background: 'linear-gradient(180deg, rgba(111, 15, 38, 0.42) 0%, rgba(160, 82, 99, 0.18) 35%, rgba(255, 244, 230, 0.10) 100%)',
+                boxShadow: 'inset 0 0 0 1px rgba(255, 247, 232, 0.18)',
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-9 opacity-80"
+              style={{
+                backgroundImage: 'url("/images/garland-strip.png")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
             />
             <div
